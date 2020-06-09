@@ -71,7 +71,7 @@ router.get(
                 httpOnly: true,
                 domain: conf.DOMAIN
             })
-            .redirect(`${conf.FRONT_END_URL}/flow/${req.user.id}`);
+            .redirect(`${conf.FRONT_END_URL}/profile`);
     }
 );
 
