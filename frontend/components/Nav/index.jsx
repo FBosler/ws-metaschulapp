@@ -45,7 +45,7 @@ const Navbar = () => {
                 <Nav className="mr-auto">
                     <NavDropdown title="Menu" id="basic-nav-dropdown">
                         <NavDropdown.Item href={`${baseUrl}/profile`}>Profile</NavDropdown.Item>
-                        <NavDropdown.Item href={`${baseUrl}/concepts/de/fractions`}>Bruchrechnen</NavDropdown.Item>
+                        <NavDropdown.Item href={`${baseUrl}/overview`}>Übersicht</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 {Logout}
