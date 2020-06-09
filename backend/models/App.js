@@ -1,22 +1,69 @@
 import mongoose from "mongoose";
 
+const SCHOOLTYPES = [
+    "Kindergarte",
+    "Grundschule",
+    "Hauptschule",
+    "Gymnasium",
+    "Realschule",
+    "Gesamtschule",
+    "Förderschule",
+    "Berufliche Schule",
+];
+
+const SUBJECTS = [
+    "fachunabhängige Verwendung",
+    "Arbeitslehre",
+    "Astronomie",
+    "Berufsvorbereitung",
+    "Biologie",
+    "Chemie",
+    "Deutsch",
+    "Deutsch als Zweitsprache (DaZ)",
+    "Deutsch als Fremdsprache (DaF)",
+    "Englisch",
+    "Erdkunde/Geografie",
+    "Ethik",
+    "Evangelische Religionslehre",
+    "Französisch",
+    "Gemeinschaftskunde",
+    "Geschichte",
+    "Gesellschaftslehre",
+    "Informatik",
+    "Katholische Religionslehre",
+    "Kunst",
+    "Latein",
+    "Mathematik",
+    "Musik",
+    "Naturwissenschaften",
+    "Pädagogik",
+    "Physik",
+    "Politik",
+    "Praktische Philosophie",
+    "Russisch",
+    "Sachunterricht",
+    "Sozialwissenschaften",
+    "Spanisch",
+    "Sprachen",
+    "Technik",
+    "Wirtschaft",
+    "Alle",
+];
+
+const USECASE = [
+    "Organisation/Administration",
+    "Unterrichtsvorbereitung",
+    "Unterrichtsdurchführung",
+    "Selbstlernen",
+    "Fortbildung für Lehrer*innen",
+    "Infrastruktur",
+    "Alle",
+];
+
 const SubjectSchema = new mongoose.Schema({
     name: {
         type: String,
-        enum: [
-            "Biologie",
-            "Chemie",
-            "Informatik",
-            "Englisch",
-            "Französisch",
-            "Geographie",
-            "Deutsch",
-            "Geschichte",
-            "Latein",
-            "Mathematik",
-            "Musik",
-            "Physik",
-        ],
+        enum: SUBJECTS,
     },
     coveredGrades: {
         type: [String],
@@ -31,13 +78,14 @@ const UserSchema = new mongoose.Schema(
         url: { type: String },
         description: { type: String },
         focusesOn: { type: [String], enum: ["Eltern", "Lehrer", "Schüler"] },
+        useCase: {type: [String], enum: USECASE},
         applicableTo: {
             subjects: {
                 type: [SubjectSchema],
             },
             schoolTypes: {
                 type: [String],
-                enum: ["Grundschule", "Hauptschule", "Gymnasium", "Realschule", "Gesamtschule"],
+                enum: SCHOOLTYPES,
             },
         },
         nativeApp: { type: [String], enum: ["Iphone", "Android", "Ipad", "Mac", "PC"] },
