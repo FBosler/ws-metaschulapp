@@ -1,0 +1,69 @@
+version: 2.1
+
+jobs:
+    build-and-deploy:
+        docker:
+            - image: circleci/buildpack-deps:stretch
+
+        working_directory: ~/repo
+
+        steps:
+            - add_ssh_keys:
+                  fingerprints:
+                      - "9c:55:04:22:6f:0c:30:c9:1e:da:ae:dd:aa:81:8a:86"
+
+            - checkout
+            - setup_remote_docker
+            # enable docker_layer_caching: true on better plan
+
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ checksum "package.json" }}
+                      # fallback to using the latest cache if no exact match is found
+                      - v1-dependencies-
+
+            - run:
+                  name: Install dependencies
+                  command: |
+                      sudo apt-get install awscli
+                      sudo apt-get install python3-pip
+                      sudo pip3 install --upgrade awscli
+            - run:
+                  name: Build and push Docker Image
+                  command: |
+                      docker-compose build
+                      $(aws ecr get-login --no-include-email)
+                      docker-compose push
+            - run:
+                  name: SSH into EC2 and pull image
+                  command: |
+                      if [ "${CIRCLE_BRANCH}" == "production" ]; then
+                        ssh -o StrictHostKeyChecking=no ubuntu@3.121.195.172 \<< EOF
+                        cd ws-metaschulapp
+                        git fetch --all
+                        git reset --hard origin/master
+                        sudo $(aws ecr get-login --no-include-email --region eu-central-1)
+                        sudo docker rmi $(sudo docker images -a -q)
+                        sudo docker system prune --volumes --force
+                        sudo docker-compose pull
+                        sudo docker-compose down
+                        sudo docker-compose up -d
+                      EOF
+                      else
+                        echo "NO DEPLOY (only deploying in staging and production)"
+                      fi
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: v1-dependencies-{{ checksum "package.json" }}
+
+workflows:
+    version: 2.1
+    build-and-deploy-workflow:
+        jobs:
+            - build-and-deploy:
+                filters:
+                    branches:  
+                        only:  
+                            - production
+                context: AWS

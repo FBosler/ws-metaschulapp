@@ -1,0 +1,64 @@
+version: "3.7"
+
+services:
+    frontend:
+        build:
+            context: .
+            dockerfile: Dockerfile-frontend
+        image: 162593546101.dkr.ecr.eu-central-1.amazonaws.com/ws/frontend:latest
+        container_name: frontend
+        command: npm start --prefix ./frontend
+        ports:
+            - 3000:3000
+        networks:
+            - app-network
+
+    backend:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: 162593546101.dkr.ecr.eu-central-1.amazonaws.com/ws/backend:latest
+        container_name: backend
+        command: /bin/sh ./wait-for.sh db:27017 -- node server/server.js
+        env_file: .env
+        environment:
+            - NODE_ENV=production
+        ports:
+            - 5000:5000
+        networks:
+            - app-network
+
+    mongo:
+        image: mongo
+        container_name: db
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            - NODE_ENV=production
+            - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+            - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+        volumes:
+            - ./data/db:/data/db
+        networks:
+            - app-network
+        ports:
+            - 27016:27017
+
+    nginx:
+        image: nginx:1.17-alpine
+        restart: unless-stopped
+        volumes:
+            - ./data/nginx:/etc/nginx/conf.d
+        networks:
+            - app-network
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - frontend
+            - backend
+        command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+
+networks:
+    app-network:
+        driver: bridge

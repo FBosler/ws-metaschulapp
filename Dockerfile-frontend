@@ -1,0 +1,9 @@
+FROM node:12.2.0-alpine
+WORKDIR /app
+COPY ./frontend/package.json /app/frontend/package.json
+COPY .env /app/.env
+
+RUN cd /app/frontend && yarn
+
+COPY ./frontend /app/frontend
+RUN cd /app/frontend && NODE_ENV=production yarn build

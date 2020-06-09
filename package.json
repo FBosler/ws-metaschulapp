@@ -1,0 +1,17 @@
+{
+    "name": "social-login-root-folder",
+    "version": "1.0.0",
+    "description": "This is the root project for our frontend and backend",
+    "main": "index.js",
+    "repository": "https://github.com/FBosler/fb-tutorial-social-login",
+    "author": "Fabian Bosler",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "start": "concurrently --prefix none \"cd backend && NODE_ENV=development yarn nodemon server.js\" \"cd frontend && yarn dev\""
+    },
+    "devDependencies": {
+        "concurrently": "^5.1.0"
+    },
+    "dependencies": {}
+}
