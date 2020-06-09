@@ -8,7 +8,7 @@ import {
 } from "./styles";
 import SignupLoginModal from "../SignupLoginModal";
 
-const URL = "assets/images/nathan-dumlao-ewGMqs2tmJI-unsplash.jpg";
+const URL = "https://cdn.pixabay.com/photo/2014/05/18/19/15/lecture-hall-347316_1280.jpg"
 
 const Landing = () => {
     const [show, setShow] = useState(false);
