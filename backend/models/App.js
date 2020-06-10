@@ -102,6 +102,14 @@ const DIDACTICS = [
     "offener Unterricht",
 ];
 
+
+const RatingSchema = new mongoose.Schema({
+    createdAt: { type: Date, default: Date.now },
+    comment: { type: String },
+    by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    value: { type: Number },
+});
+
 const AppSchema = new mongoose.Schema(
     {
         createdAt: { type: Date, default: Date.now },
@@ -115,7 +123,7 @@ const AppSchema = new mongoose.Schema(
         supportedBrowser: { type: [String], enum: BROWSERS },
         requiresInternet: { type: Boolean },
         offlineModeAvailable: { type: Boolean },
-        comments: { type: String },
+        ratings: { type: [RatingSchema] },
         appTypes: { type: [String], enum: APPTYPES },
         stores: { type: [String], enum: STORES },
         licenses: { type: [String], enum: LICENSES },
@@ -132,7 +140,6 @@ const AppSchema = new mongoose.Schema(
         useCase: { type: [String], enum: USECASE },
         teachingPhases: { type: [String], enum: TEACHINGPHASES },
         didactics: { type: [String], enum: DIDACTICS },
-        nativeApp: { type: [String], enum: ["Iphone", "Android", "Ipad", "Mac", "PC"] },
         images: {},
     },
     { strict: false },

@@ -1,7 +1,5 @@
 import React from "react";
-import { Form, Container, Row, Col } from "react-bootstrap";
-
-import { StyledErrorMessage, StyledLabel, StyledSelect } from "./styles";
+import { Form, Row, Col } from "react-bootstrap";
 
 import { SCHOOLTYPES, CLASSES, SUBJECTS, USECASE } from "./options";
 

@@ -1,3 +1,5 @@
+import { FaPlusSquare } from "react-icons/fa";
+import { AiOutlineMessage } from "react-icons/ai";
 import styled from "styled-components";
 
 export const SelectionContainer = styled("div")`
@@ -18,3 +20,15 @@ export const SelectionOption = styled("div")`
     color: blueviolet;
     text-align: center
 `
+
+export const PlusSymbol = styled(AiOutlineMessage)`
+    font-size: 300%;
+    margin: 20px 0px;
+`;
+
+export const DivCenterContent = styled("div")`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+`;

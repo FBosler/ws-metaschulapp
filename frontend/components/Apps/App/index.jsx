@@ -3,6 +3,8 @@ import axios from "axios";
 import { SelectionContainer, SelectionOption } from "./styles";
 import { Row, Col } from "react-bootstrap";
 
+import Comment from "./Comment";
+
 const Block = ({ label, content }) => {
     return (
         <Row>
@@ -18,7 +20,9 @@ const BoolBlock = ({ label, content }) => {
     return (
         <Row>
             <Col>
-                <h2>{label}: {content ? "Ja" : "Nein"}</h2>
+                <h2>
+                    {label}: {content ? "Ja" : "Nein"}
+                </h2>
             </Col>
         </Row>
     );
@@ -63,7 +67,7 @@ const App = ({ _id }) => {
                 <>
                     <Row>
                         <Col xs={12}>
-                            <b style={{ fontSize: "240%" }}>Name: {app.name}</b>
+                            <b style={{ fontSize: "240%" }}>{app.name}</b>
                         </Col>
                     </Row>
                     <Block label={"Beschreibung"} content={app.description} />
@@ -77,6 +81,7 @@ const App = ({ _id }) => {
                     <List label={"Lehrmethoden"} content={app.didactics} />
                     <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
                     <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} />
+                    <Comment />
                 </>
             ) : (
                 "Not loaded"
