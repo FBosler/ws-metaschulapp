@@ -128,7 +128,7 @@ const UserSchema = new mongoose.Schema(
         },
         schoolTypes: { type: [String], enum: SCHOOLTYPES },
         classes: { type: [String], enum: CLASSES },
-        subjects: { type: [String], enum: [SUBJECTS] },
+        subjects: { type: [String], enum: SUBJECTS },
         useCase: { type: [String], enum: USECASE },
         teachingPhases: { type: [String], enum: TEACHINGPHASES },
         didactics: {type: [String], enum: DIDACTICS},
