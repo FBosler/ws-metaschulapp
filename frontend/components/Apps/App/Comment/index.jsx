@@ -22,7 +22,6 @@ export const BottomRightCorner = styled("div")`
     font-size: 75%;
 `;
 
-
 export const DivFlexRight = styled("div")`
     display: flex;
     justify-content: flex-end;
@@ -34,20 +33,28 @@ const TimeStamp = (date) => {
     return <BottomRightCorner>{FormatDate(date)}</BottomRightCorner>;
 };
 
-const Comment = ({ appId, msg }) => {
+const Comment = ({ app, setApp, msg }) => {
     const [showNewMessage, setShowNewMessage] = useState(false);
     const [rating, setRating] = useState(null);
     const [comment, setComment] = useState("");
 
     function sendRating({ appId, rating, comment }) {
-        console.log("in send rating");
-        console.log(rating, comment, appId);
 
         if (rating && comment) {
             axios
                 .post("/api/apps/rate_app", { appId, rating, comment }, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
+                    setRating(null)
+                    setComment("")
+                    setShowNewMessage(false)
+                    setApp(app => {
+                        const updatedApp = {...app}
+                        console.log(res)
+                        console.log(res.data)
+                        updatedApp.ratings.push(res.data.data)
+                        console.log(updatedApp)
+                        return updatedApp
+                    })
                 })
                 .catch((err) => {
                     console.log(err);
@@ -79,7 +86,7 @@ const Comment = ({ appId, msg }) => {
                                 />
                             </Form.Group>
                             <DivFlexRight>
-                                <Button onClick={() => sendRating({ appId, rating, comment })}>
+                                <Button onClick={() => sendRating({ appId: app._id, rating, comment })}>
                                     Abschicken <FiSend />
                                 </Button>
                             </DivFlexRight>

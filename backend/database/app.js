@@ -47,7 +47,7 @@ async function rateApp({ appId, userId, rating, comment }) {
         if (updateErr) {
             return reject(updateErr);
         }
-        return resolve(update);
+        return resolve(update.ratings.slice(-1,)[0]);
     });
 }
 

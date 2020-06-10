@@ -82,33 +82,31 @@ const App = ({ _id }) => {
                     <List label={"Lehrmethoden"} content={app.didactics} />
                     {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
                     <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
-                    <Row style={{border:"solid 1px grey"}}/>
+                    <Row style={{ border: "solid 1px grey" }} />
                     <h1>Kommentare & Bewertungen:</h1>
-                    <Comment appId={app._id} />
+                    <Comment app={app} setApp={setApp} />
                     <Row>
                         {app.ratings.map((rating) => (
-                            <>
-                                <StyledComment className="z-depth-1">
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "row-reverse",
-                                            justifyContent: "space-between",
-                                        }}
-                                    >
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            value={rating.value}
-                                            color2={"#ffd700"}
-                                            edit={false}
-                                        />
-                                        <b style={{ alignItems: "center", display: "flex" }}>Von: {rating.byName}</b>
-                                    </div>
-                                    {rating.comment}
-                                    <br />
-                                </StyledComment>
-                            </>
+                            <StyledComment className="z-depth-1" key={rating._id}>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "row-reverse",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <ReactStars
+                                        count={5}
+                                        size={24}
+                                        value={rating.value}
+                                        color2={"#ffd700"}
+                                        edit={false}
+                                    />
+                                    <b style={{ alignItems: "center", display: "flex" }}>Von: {rating.byName}</b>
+                                </div>
+                                {rating.comment}
+                                <br />
+                            </StyledComment>
                         ))}
                     </Row>
                 </>
