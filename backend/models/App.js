@@ -102,7 +102,7 @@ const DIDACTICS = [
     "offener Unterricht",
 ];
 
-const UserSchema = new mongoose.Schema(
+const AppSchema = new mongoose.Schema(
     {
         createdAt: { type: Date, default: Date.now },
         name: { type: String },
@@ -139,4 +139,4 @@ const UserSchema = new mongoose.Schema(
     { versionKey: false }
 );
 
-export default mongoose.model("User", UserSchema);
+export default mongoose.model("App", AppSchema);
