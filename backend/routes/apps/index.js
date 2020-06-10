@@ -8,6 +8,8 @@ import { isRole, signToken } from "../utils";
 import App from "../../models/App";
 import { ensureLoggedIn } from "../utils";
 
+import { rateApp } from "../../database/app";
+
 const router = express.Router();
 
 router.get("/:_id", async (req, res) => {
@@ -18,7 +20,7 @@ router.get("/:_id", async (req, res) => {
 
         if (_id === "all") {
             const [err, allApps] = await to(
-                App.find({}, { _id: 1, useCase: 1, name: 1, schoolTypes: 1, classes: 1, subjects: 1 })
+                App.find({}, { _id: 1, useCase: 1, name: 1, schoolTypes: 1, classes: 1, subjects: 1, ratings: 1 })
             );
             if (err) {
                 res.status(400).json({ data: {}, errors: err });
@@ -32,6 +34,19 @@ router.get("/:_id", async (req, res) => {
             } else {
                 res.status(200).json({ data: app, errors: "" });
             }
+        }
+    }
+});
+
+router.post("/rate_app", async (req, res) => {
+    if (ensureLoggedIn(req, res)) {
+        const userId = req.user.id;
+        const { appId, rating, comment } = req.body;
+        const [err, update] = await to(rateApp({ appId, userId, rating, comment }));
+        if (err) {
+            res.status(400).json({ data: {}, errors: err });
+        } else {
+            res.status(200).json({ data: update, errors: "" });
         }
     }
 });

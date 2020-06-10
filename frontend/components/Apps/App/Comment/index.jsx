@@ -22,13 +22,6 @@ export const BottomRightCorner = styled("div")`
     font-size: 75%;
 `;
 
-export const OwnMessage = styled(Col)`
-    position: relative;
-    border-radius: 6px;
-    background-color: #f9ef8c;
-    height: 200px
-    margin: 15px
-`;
 
 export const DivFlexRight = styled("div")`
     display: flex;
@@ -41,10 +34,26 @@ const TimeStamp = (date) => {
     return <BottomRightCorner>{FormatDate(date)}</BottomRightCorner>;
 };
 
-const Comment = ({ msg }) => {
+const Comment = ({ appId, msg }) => {
     const [showNewMessage, setShowNewMessage] = useState(false);
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState("")
+    const [rating, setRating] = useState(null);
+    const [comment, setComment] = useState("");
+
+    function sendRating({ appId, rating, comment }) {
+        console.log("in send rating");
+        console.log(rating, comment, appId);
+
+        if (rating && comment) {
+            axios
+                .post("/api/apps/rate_app", { appId, rating, comment }, { withCredentials: true })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }
 
     return (
         <>
@@ -55,7 +64,7 @@ const Comment = ({ msg }) => {
                 >
                     <Col xs={12}>
                         <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-                            <ReactStars count={5} size={24} value={rating} color2={"#ffd700"} onChange={setRating}/>
+                            <ReactStars count={5} size={24} value={rating} color2={"#ffd700"} onChange={setRating} />
                         </div>
                     </Col>
                     <Col xs={12}>
@@ -70,7 +79,7 @@ const Comment = ({ msg }) => {
                                 />
                             </Form.Group>
                             <DivFlexRight>
-                                <Button onClick={() => console.log(rating,comment)}>
+                                <Button onClick={() => sendRating({ appId, rating, comment })}>
                                     Abschicken <FiSend />
                                 </Button>
                             </DivFlexRight>

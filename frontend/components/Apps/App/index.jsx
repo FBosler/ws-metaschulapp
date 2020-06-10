@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { SelectionContainer, SelectionOption } from "./styles";
+import { SelectionContainer, SelectionOption, StyledComment } from "./styles";
 import { Row, Col } from "react-bootstrap";
 
 import Comment from "./Comment";
+import ReactStars from "react-stars";
 
 const Block = ({ label, content }) => {
     return (
@@ -37,7 +38,7 @@ const List = ({ label, content }) => {
             <Col>
                 <SelectionContainer>
                     {content.map((_) => {
-                        return <SelectionOption>{_}</SelectionOption>;
+                        return <SelectionOption key={_}>{_}</SelectionOption>;
                     })}
                 </SelectionContainer>
             </Col>
@@ -79,9 +80,37 @@ const App = ({ _id }) => {
                     <List label={"Anwendungsfälle"} content={app.useCase} />
                     <List label={"Lehrphasen"} content={app.teachingPhases} />
                     <List label={"Lehrmethoden"} content={app.didactics} />
-                    <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
-                    <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} />
-                    <Comment />
+                    {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
+                    <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
+                    <Row style={{border:"solid 1px grey"}}/>
+                    <h1>Kommentare & Bewertungen:</h1>
+                    <Comment appId={app._id} />
+                    <Row>
+                        {app.ratings.map((rating) => (
+                            <>
+                                <StyledComment className="z-depth-1">
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            flexDirection: "row-reverse",
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <ReactStars
+                                            count={5}
+                                            size={24}
+                                            value={rating.value}
+                                            color2={"#ffd700"}
+                                            edit={false}
+                                        />
+                                        <b style={{ alignItems: "center", display: "flex" }}>Von: {rating.byName}</b>
+                                    </div>
+                                    {rating.comment}
+                                    <br />
+                                </StyledComment>
+                            </>
+                        ))}
+                    </Row>
                 </>
             ) : (
                 "Not loaded"

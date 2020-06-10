@@ -1,6 +1,7 @@
 import { FaPlusSquare } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
 import styled from "styled-components";
+import { Row, Col } from "react-bootstrap";
 
 export const SelectionContainer = styled("div")`
     display: flex;
@@ -31,4 +32,12 @@ export const DivCenterContent = styled("div")`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+`;
+
+export const StyledComment = styled(Col)`
+    position: relative;
+    border-radius: 6px;
+    background-color: #f9ef8c;
+    margin: 15px;
+    border: solid 1px grey
 `;

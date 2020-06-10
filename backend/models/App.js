@@ -106,7 +106,8 @@ const DIDACTICS = [
 const RatingSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     comment: { type: String },
-    by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    byId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    byName: {type: String},
     value: { type: Number },
 });
 
