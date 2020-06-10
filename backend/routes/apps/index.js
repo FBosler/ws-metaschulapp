@@ -14,10 +14,12 @@ router.get("/:_id", async (req, res) => {
     if (ensureLoggedIn(req, res)) {
         const _id = req.params._id;
 
-        console.log('fetching')
+        console.log("fetching");
 
         if (_id === "all") {
-            const [err, allApps] = await to(App.find({},{'_id':1,'useCase':1,'name':1}));
+            const [err, allApps] = await to(
+                App.find({}, { _id: 1, useCase: 1, name: 1, schoolTypes: 1, classes: 1, subjects: 1 })
+            );
             if (err) {
                 res.status(400).json({ data: {}, errors: err });
             } else {
@@ -33,7 +35,5 @@ router.get("/:_id", async (req, res) => {
         }
     }
 });
-
-
 
 export default router;
