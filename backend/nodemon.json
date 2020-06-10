@@ -1,5 +1,5 @@
 {
-    "watch": ["../server"],
+    "watch": ["../backend"],
     "exec": "NODE_ENV=development babel-node server.js",
     "ext": "js"
   }

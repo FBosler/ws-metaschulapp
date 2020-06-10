@@ -8,7 +8,9 @@ const ensureLoggedIn = (req, res) => {
 
     if (!userId) {
         res.status(401).json({ data: {}, errors: "Not logged in" });
+        return false
     }
+    return true
 };
 
 const extractUserFromJWT = (req, res, next) => {

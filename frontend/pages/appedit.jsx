@@ -1,4 +1,4 @@
-import AppEdit from "../components/AppEdit"
+import AppEdit from "../components/Apps/AppEdit"
 
 export default () => {
     return <AppEdit/>;

@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import passport from "./passport/setup";
 import auth from "./routes/auth";
 import user from "./routes/user";
+import apps from "./routes/apps";
 import { extractUserFromJWT } from "./routes/utils";
 
 // const admin = require("./routes/admin");
@@ -42,5 +43,6 @@ app.use(passport.initialize());
 // Routes
 app.use("/api/auth", extractUserFromJWT, auth);
 app.use("/api/user", extractUserFromJWT, user);
+app.use("/api/apps", extractUserFromJWT, apps);
 
 server.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));
