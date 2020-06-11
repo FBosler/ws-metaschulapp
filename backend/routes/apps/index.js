@@ -29,7 +29,7 @@ router.get("/:_id", async (req, res) => {
                         subjects: 1,
                         ratings: 1,
                         overallRating: 1,
-                        numberOfRatings: 1,
+                        numberOfRatings: 1
                     }
                 )
             );

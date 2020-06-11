@@ -5,7 +5,8 @@ import SignupLoginModal from "../SignupLoginModal";
 
 import Link from "next/link";
 
-const URL = "https://cdn.pixabay.com/photo/2014/05/18/19/15/lecture-hall-347316_1280.jpg";
+// const URL = "https://cdn.pixabay.com/photo/2014/05/18/19/15/lecture-hall-347316_1280.jpg";
+const URL = "/assets/images/background.jpg";
 
 const Landing = () => {
     const [show, setShow] = useState(false);

@@ -47,9 +47,10 @@ const Navbar = () => {
                     <NavDropdown title="Menu" id="basic-nav-dropdown">
                         <NavDropdown.Item href={`${baseUrl}/profile`}>Profil</NavDropdown.Item>
                         <NavDropdown.Item href={`${baseUrl}/overview`}>Übersicht</NavDropdown.Item>
+                        <NavDropdown.Item href={`${baseUrl}/successstories`}>Erfolgsgeschichten</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
-                <span style={{marginRight:"auto",marginLeft:"auto",fontSize:"130%"}}><b>Deutschlands größter Schulappvergleich</b></span>
+                <span style={{marginRight:"auto",marginLeft:"auto",fontSize:"130%"}}><b>Deutschlands größte Schulappübersicht</b></span>
                 {Logout}
                 {Login}
             </StyledNav.Collapse>

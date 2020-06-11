@@ -52,13 +52,13 @@ const filterMatching = ({ apps, applicableFilter, field }) => {
 
 const turnIntoArray = (inp) => {
     if (inp && !Array.isArray(inp)) {
-        return [inp]
+        return [inp];
     } else {
-        return inp
+        return inp;
     }
-}
+};
 
-const Overview = ({query}) => {
+const Overview = ({ query }) => {
     const router = useRouter();
     const [apps, setApps] = useState(null);
     const [filteredApps, setFilteredApps] = useState(apps);
@@ -70,7 +70,6 @@ const Overview = ({query}) => {
         useCase: [],
     });
 
-
     useEffect(() => {
         setFilterSettings({
             name: "",
@@ -78,8 +77,8 @@ const Overview = ({query}) => {
             schoolTypes: turnIntoArray(query.schoolTypes) ?? [],
             classes: turnIntoArray(query.classes) ?? [],
             useCase: turnIntoArray(query.useCase) ?? [],
-        })
-    }, [query])
+        });
+    }, [query]);
 
     useEffect(() => {
         axios
@@ -126,7 +125,7 @@ const Overview = ({query}) => {
     return (
         <>
             <Filter {...{ filterSettings, setFilterSettings }} />
-            <DividerRow style={{marginBottom: "10px"}}/>
+            <DividerRow style={{ marginBottom: "10px" }} />
             {filteredApps ? (
                 <Row style={{ marginLeft: "-5px", marginRight: "-5px" }}>
                     {filteredApps.map((_) => (

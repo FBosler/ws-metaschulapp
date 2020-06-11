@@ -145,7 +145,9 @@ const AppSchema = new mongoose.Schema(
         useCase: { type: [String], enum: USECASE },
         teachingPhases: { type: [String], enum: TEACHINGPHASES },
         didactics: { type: [String], enum: DIDACTICS },
-        images: {},
+        images: {
+            logo: {type: String}
+        },
     },
     { strict: false },
     { versionKey: false }
