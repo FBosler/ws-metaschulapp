@@ -50,6 +50,14 @@ const filterMatching = ({ apps, applicableFilter, field }) => {
     }
 };
 
+const turnIntoArray = (inp) => {
+    if (inp && !Array.isArray(inp)) {
+        return [inp]
+    } else {
+        return inp
+    }
+}
+
 const Overview = ({query}) => {
     const router = useRouter();
     const [apps, setApps] = useState(null);
@@ -66,10 +74,10 @@ const Overview = ({query}) => {
     useEffect(() => {
         setFilterSettings({
             name: "",
-            subjects: query.subjects ?? [],
-            schoolTypes: query.schoolTypes ?? [],
-            classes: query.classes ?? [],
-            useCase: query.useCase ?? [],
+            subjects: turnIntoArray(query.subjects) ?? [],
+            schoolTypes: turnIntoArray(query.schoolTypes) ?? [],
+            classes: turnIntoArray(query.classes) ?? [],
+            useCase: turnIntoArray(query.useCase) ?? [],
         })
     }, [query])
 

@@ -32,7 +32,7 @@ export default class MyDocument extends Document {
             <Html>
                 <Head>
                     <link rel="shortcut icon" href="/favicon.ico" />
-                    <meta name="description" content="Die beste Platform um effizient Mathe zu lernen" />
+                    <meta name="description" content="One App to rule them all, One App to find them" />
                     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
                     <link rel="manifest" href="/manifest.json" />
                     <link

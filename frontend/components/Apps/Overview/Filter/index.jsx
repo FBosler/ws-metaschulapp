@@ -3,11 +3,11 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 
 import { SCHOOLTYPES, CLASSES, SUBJECTS, USECASE } from "./options";
 
-const mapOptions = (arr) => {
+const mapOptions = (selected, arr) => {
     return (
         <>
             {arr.map((_) => (
-                <option key={_} value={_}>
+                <option key={_}>
                     {_}
                 </option>
             ))}
@@ -15,15 +15,15 @@ const mapOptions = (arr) => {
     );
 };
 
-const MultiSelect = ({ controlId, label, options, handleChange }) => {
+const MultiSelect = ({ filterSettings, controlId, label, options, handleChange }) => {
     return (
         <Col xs="auto">
             <Form.Group controlId={controlId}>
                 <Form.Label>
                     <span style={{ fontWeight: "bolder" }}>{label}</span>
                 </Form.Label>
-                <Form.Control as="select" multiple onChange={(e) => handleChange(e, controlId)}>
-                    {mapOptions(options)}
+                <Form.Control as="select" multiple onChange={(e) => handleChange(e, controlId)} value={filterSettings[controlId]}>
+                    {mapOptions(filterSettings[controlId], options)}
                 </Form.Control>
             </Form.Group>
         </Col>
