@@ -120,7 +120,7 @@ const AppEdit = ({ _id }) => {
 
     const handleSubmission = () => {
         axios
-            .post(`/api/apps/update`, {app: app}, { withCredentials: true })
+            .post(`/api/apps/update`, { app: app }, { withCredentials: true })
             .then(() => {
                 router.push(`${router.asPath}/..`);
             })
@@ -193,7 +193,7 @@ const AppEdit = ({ _id }) => {
                         handleMultiSelect={handleMultiSelect}
                     />
                     <DisplayMultiSelect
-                        label={"Anwendungsmöglichkeiten"}
+                        label={"Anwendungsarten"}
                         targetField={"useCase"}
                         currSelection={app.useCase}
                         availableOptions={USECASE}
@@ -215,8 +215,8 @@ const AppEdit = ({ _id }) => {
                     />
                     {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
                     <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
-                    <Row>
-                        <Col xs={{ span: 2, offset: 10 }} style={{ display: "flex", alignItems: "center" }}>
+                    <Row style={{ paddingBottom: "10px" }}>
+                        <Col style={{ display: "flex", alignItems: "flex-end", flexDirection: "column-reverse" }}>
                             <Button onClick={() => handleSubmission()}>Speichern</Button>
                         </Col>
                     </Row>

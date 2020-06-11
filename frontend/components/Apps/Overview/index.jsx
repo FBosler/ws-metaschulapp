@@ -11,7 +11,7 @@ import Filter from "./Filter";
 
 const App = ({ app, router }) => {
     return (
-        <Col xs={6} md={4} style={{ paddingLeft: "5px", paddingRight: "5px", marginBottom: "5px" }}>
+        <Col xs={12} md={4} style={{ paddingLeft: "5px", paddingRight: "5px", marginBottom: "5px" }}>
             <Card style={{ width: "100%" }} key={app._id} onClick={() => router.push(`/../apps/${app._id}`)}>
                 <Card.Body style={{ padding: "0.5rem 1.25rem" }}>
                     <Card.Title style={{ marginBottom: "5px" }}>

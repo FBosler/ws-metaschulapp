@@ -170,7 +170,7 @@ const App = ({ _id }) => {
                     </Row>
                     <Row style={{ border: "solid 1px grey" }} />
                     <Row style={{ marginTop: "10px" }}>
-                        <Col xs={{ span: 2, offset: 10 }} style={{ display: "flex", alignItems: "center" }}>
+                        <Col style={{ display: "flex", alignItems: "flex-end", flexDirection:"column-reverse"}}>
                             <Button onClick={() => router.push(`/apps/${router.query._id}/edit`)}>Edit</Button>
                         </Col>
                     </Row>
