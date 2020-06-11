@@ -99,3 +99,5 @@ export const DIDACTICS = [
     "flipped classroom",
     "offener Unterricht",
 ];
+
+export const FOCUSGROUP = ["Eltern", "Lehrer", "Schüler", "Verwaltung"];

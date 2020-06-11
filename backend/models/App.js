@@ -102,12 +102,13 @@ const DIDACTICS = [
     "offener Unterricht",
 ];
 
+const FOCUSGROUP = ["Eltern", "Lehrer", "Schüler", "Verwaltung"];
 
 const RatingSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     comment: { type: String },
     byId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    byName: {type: String},
+    byName: { type: String },
     value: { type: Number },
 });
 
@@ -117,8 +118,9 @@ const AppSchema = new mongoose.Schema(
         name: { type: String },
         provider: { type: String },
         url: { type: String },
+        explanationUrl: { type: String },
         description: { type: String },
-        focusesOn: { type: [String], enum: ["Eltern", "Lehrer", "Schüler", "Verwaltung"] },
+        focusesOn: { type: [String], enum: FOCUSGROUP },
         realeasedIn: { type: Number },
         supportedPlatforms: { type: [String], enum: PLATFORMS },
         supportedBrowser: { type: [String], enum: BROWSERS },

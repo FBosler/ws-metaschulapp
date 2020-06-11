@@ -2,48 +2,71 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { SelectionContainer, SelectionOption, StyledComment } from "./styles";
 import { Row, Col } from "react-bootstrap";
+import Link from "next/link";
 
 import Comment from "./Comment";
 import ReactStars from "react-stars";
 
-const Block = ({ label, content }) => {
-    return (
-        <Row>
-            <Col>
-                <h2>{label}: </h2>
-                <p>{content}</p>
-            </Col>
-        </Row>
-    );
+const Block = ({ label, content, type }) => {
+    if (content) {
+        return (
+            <Row>
+                <Col>
+                    {type && type === "link" ? (
+                        <Link href={content} prefetch={false}>
+                            <a>
+                                <h2>{label}</h2>
+                            </a>
+                        </Link>
+                    ) : (
+                        <>
+                            <h2>{label}: </h2>
+                            <p>{content}</p>
+                        </>
+                    )}
+                </Col>
+            </Row>
+        );
+    } else {
+        return "";
+    }
 };
 
 const BoolBlock = ({ label, content }) => {
-    return (
-        <Row>
-            <Col>
-                <h2>
-                    {label}: {content ? "Ja" : "Nein"}
-                </h2>
-            </Col>
-        </Row>
-    );
+    if (content) {
+        return (
+            <Row>
+                <Col>
+                    <h2>
+                        {label}: {content ? "Ja" : "Nein"}
+                    </h2>
+                </Col>
+            </Row>
+        );
+    } else {
+        return "";
+    }
 };
 
 const List = ({ label, content }) => {
-    return (
-        <Row>
-            <Col xs={12}>
-                <h2>{label}: </h2>
-            </Col>
-            <Col>
-                <SelectionContainer>
-                    {content.map((_) => {
-                        return <SelectionOption key={_}>{_}</SelectionOption>;
-                    })}
-                </SelectionContainer>
-            </Col>
-        </Row>
-    );
+    if (content.length > 0) {
+        return (
+            <Row>
+                <Col xs={12}>
+                    <h2>{label}: </h2>
+                </Col>
+                <Col>
+                    <SelectionContainer>
+                        {content.map((_) => {
+                            return <SelectionOption key={_}>{_}</SelectionOption>;
+                        })}
+                    </SelectionContainer>
+                </Col>
+            </Row>
+        );
+    } else {
+        return "";
+    }
 };
 
 const App = ({ _id }) => {
@@ -72,7 +95,8 @@ const App = ({ _id }) => {
                         </Col>
                     </Row>
                     <Block label={"Beschreibung"} content={app.description} />
-                    <Block label={"Webpage"} content={app.url} />
+                    <Block label={"Webpage"} content={app.url} type="link" />
+                    <Block label={"Erklärvideo"} content={app.explanationUrl} />
                     <List label={"Unterstützte Browser"} content={app.supportedBrowser} />
                     <List label={"App Typen"} content={app.appTypes} />
                     <List label={"Schul Typen"} content={app.schoolTypes} />
