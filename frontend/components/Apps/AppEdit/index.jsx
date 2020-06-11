@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FlexCol, SelectionContainer, SelectedOption, AvailableOption } from "./styles";
-import { Row, Col } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 
 import {
     SCHOOLTYPES,
@@ -100,6 +100,23 @@ const DisplayMultiSelect = ({ label, targetField, currSelection, availableOption
     );
 };
 
+const LabelAndInput = ({ label, value, handleChange, updateTarget, rows = 1 }) => (
+    <Row>
+        <Form.Label column xs="2">
+            {label}
+        </Form.Label>
+        <Col xs={10}>
+            <Form.Control
+                as="textarea"
+                rows={rows}
+                type="text"
+                value={value}
+                onChange={(e) => handleChange(e.target.value, updateTarget)}
+            />
+        </Col>
+    </Row>
+);
+
 const AppEdit = ({ _id }) => {
     const [app, setApp] = useState(undefined);
 
@@ -129,6 +146,10 @@ const AppEdit = ({ _id }) => {
         setApp(tmpApp);
     };
 
+    const handleChange = (value,field) => {
+        console.log(value,field)
+    }
+
     return (
         <>
             {app ? (
@@ -138,8 +159,19 @@ const AppEdit = ({ _id }) => {
                             <b style={{ fontSize: "240%" }}>{app.name}</b>
                         </Col>
                     </Row>
-                    <Block label={"Beschreibung"} content={app.description} />
-                    <Block label={"Webpage"} content={app.url} />
+                    <LabelAndInput
+                        label="Beschreibung:"
+                        value={app.description || ""}
+                        handleChange={handleChange}
+                        updateTarget={"description"}
+                        rows={5}
+                    />
+                    <LabelAndInput
+                        label="Webpage:"
+                        value={app.url || ""}
+                        handleChange={handleChange}
+                        updateTarget="url"
+                    />
                     <DisplayMultiSelect
                         label={"Unterstützte Browser"}
                         targetField={"supportedBrowser"}
