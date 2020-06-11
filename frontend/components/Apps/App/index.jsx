@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { SelectionContainer, SelectionOption, StyledComment } from "./styles";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Comment from "./Comment";
 import ReactStars from "react-stars";
@@ -10,7 +11,7 @@ import ReactStars from "react-stars";
 const Block = ({ label, content, type }) => {
     if (content) {
         return (
-            <Row>
+            <Row style={{marginBottom: "10px"}}>
                 <Col>
                     {type && type === "link" ? (
                         <Link href={content} prefetch={false}>
@@ -70,6 +71,7 @@ const List = ({ label, content }) => {
 };
 
 const App = ({ _id }) => {
+    const router = useRouter();
     const [app, setApp] = useState(null);
 
     useEffect(() => {
@@ -90,13 +92,16 @@ const App = ({ _id }) => {
             {app ? (
                 <>
                     <Row>
-                        <Col xs={12}>
+                        <Col xs={10}>
                             <b style={{ fontSize: "240%" }}>{app.name}</b>
+                        </Col>
+                        <Col xs={2} style={{ display: "flex", alignItems: "center" }}>
+                            <Button onClick={() => router.push(`/apps/${router.query._id}/edit`)}>Edit</Button>
                         </Col>
                     </Row>
                     <Block label={"Beschreibung"} content={app.description} />
                     <Block label={"Webpage"} content={app.url} type="link" />
-                    <Block label={"Erklärvideo"} content={app.explanationUrl} />
+                    <Block label={"Erklärvideo"} content={app.explanationUrl} type="link" />
                     <List label={"Unterstützte Browser"} content={app.supportedBrowser} />
                     <List label={"App Typen"} content={app.appTypes} />
                     <List label={"Schul Typen"} content={app.schoolTypes} />

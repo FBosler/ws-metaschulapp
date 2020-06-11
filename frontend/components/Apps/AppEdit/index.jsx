@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FlexCol, SelectionContainer, SelectedOption, AvailableOption } from "./styles";
-import { Form, Row, Col } from "react-bootstrap";
+import { FlexCol, SelectedOption, AvailableOption } from "./styles";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import { useRouter } from "next/router";
 
 import {
     SCHOOLTYPES,
@@ -14,94 +15,56 @@ import {
     TEACHINGPHASES,
 } from "../Overview/Filter/options.js";
 
-import ReactStars from "react-stars";
-
-const Block = ({ label, content }) => {
-    return (
-        <Row>
-            <Col>
-                <h2>{label}: </h2>
-                <p>{content}</p>
-            </Col>
-        </Row>
-    );
-};
-
-const BoolBlock = ({ label, content }) => {
-    return (
-        <Row>
-            <Col>
-                <h2>
-                    {label}: {content ? "Ja" : "Nein"}
-                </h2>
-            </Col>
-        </Row>
-    );
-};
-
-const List = ({ label, content }) => {
-    return (
-        <Row>
-            <Col xs={12}>
-                <h2>{label}: </h2>
-            </Col>
-            <Col>
-                <SelectionContainer>
-                    {content.map((_) => {
-                        return <SelectedOption key={_}>{_}</SelectedOption>;
-                    })}
-                </SelectionContainer>
-            </Col>
-        </Row>
-    );
-};
-
 const DisplayMultiSelect = ({ label, targetField, currSelection, availableOptions, handleMultiSelect }) => {
     return (
         <>
             <Col>
                 <h2>{label}: </h2>
             </Col>
-            <FlexCol xs={12}>
-                Ausgewählt:
-                {currSelection
-                    ? currSelection.map((param) => (
-                          <SelectedOption
-                              key={param}
-                              onClick={(e) => {
-                                  e.persist();
-                                  handleMultiSelect({ value: e.target.innerText, targetField, mode: "removal" });
-                              }}
-                          >
-                              {param}
-                          </SelectedOption>
-                      ))
-                    : ""}
-            </FlexCol>
-            <FlexCol xs={12}>
-                Nicht ausgewählt:{" "}
-                {availableOptions
-                    ? availableOptions
-                          .filter((_) => !currSelection.includes(_))
-                          .map((param) => (
-                              <AvailableOption
-                                  key={param}
-                                  onClick={(e) => {
-                                      e.persist();
-                                      handleMultiSelect({ value: e.target.innerText, targetField, mode: "addition" });
-                                  }}
-                              >
-                                  {param}
-                              </AvailableOption>
-                          ))
-                    : ""}
-            </FlexCol>
+            {currSelection.length > 0 ? (
+                <FlexCol xs={12}>
+                    Ausgewählt:{" "}
+                    {currSelection.map((param) => (
+                        <SelectedOption
+                            key={param}
+                            onClick={(e) => {
+                                e.persist();
+                                handleMultiSelect({ value: e.target.innerText, targetField, mode: "removal" });
+                            }}
+                        >
+                            {param}
+                        </SelectedOption>
+                    ))}
+                </FlexCol>
+            ) : (
+                ""
+            )}
+            {availableOptions.filter((_) => !currSelection.includes(_)).length > 0 ? (
+                <FlexCol xs={12}>
+                    Nicht ausgewählt:{" "}
+                    {availableOptions
+                        .filter((_) => !currSelection.includes(_))
+                        .map((param) => (
+                            <AvailableOption
+                                key={param}
+                                onClick={(e) => {
+                                    e.persist();
+                                    handleMultiSelect({ value: e.target.innerText, targetField, mode: "addition" });
+                                }}
+                            >
+                                {param}
+                            </AvailableOption>
+                        ))}
+                </FlexCol>
+            ) : (
+                ""
+            )}
         </>
     );
 };
 
 const LabelAndInput = ({ label, value, handleChange, updateTarget, rows = 1 }) => (
-    <Row>
+    <Row style={{ marginBottom: "10px" }}>
         <Form.Label column xs="2">
             {label}
         </Form.Label>
@@ -119,6 +82,7 @@ const LabelAndInput = ({ label, value, handleChange, updateTarget, rows = 1 }) =
 
 const AppEdit = ({ _id }) => {
     const [app, setApp] = useState(undefined);
+    const router = useRouter();
 
     useEffect(() => {
         if (_id) {
@@ -146,9 +110,25 @@ const AppEdit = ({ _id }) => {
         setApp(tmpApp);
     };
 
-    const handleChange = (value,field) => {
-        console.log(value,field)
-    }
+    const handleChange = (value, targetField) => {
+        const tmpApp = { ...app };
+        tmpApp[targetField] = value;
+        setApp(tmpApp);
+    };
+
+    const handleSubmission = () => {
+        router.push(`${router.asPath}/..`);
+        if (_id) {
+            axios
+                .post(`/api/apps/update`, { app }, { withCredentials: true })
+                .then(() => {
+                    router.push(`${router.asPath}/..`);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    };
 
     return (
         <>
@@ -172,6 +152,12 @@ const AppEdit = ({ _id }) => {
                         handleChange={handleChange}
                         updateTarget="url"
                     />
+                    <LabelAndInput
+                        label="Erklärvideo:"
+                        value={app.explanationUrl || ""}
+                        handleChange={handleChange}
+                        updateTarget="explanationUrl"
+                    />
                     <DisplayMultiSelect
                         label={"Unterstützte Browser"}
                         targetField={"supportedBrowser"}
@@ -194,10 +180,17 @@ const AppEdit = ({ _id }) => {
                         handleMultiSelect={handleMultiSelect}
                     />
                     <DisplayMultiSelect
-                        label={"Klassen"}
+                        label={"Fächer"}
                         targetField={"subjects"}
                         currSelection={app.subjects}
                         availableOptions={SUBJECTS}
+                        handleMultiSelect={handleMultiSelect}
+                    />
+                    <DisplayMultiSelect
+                        label={"Klassen"}
+                        targetField={"classes"}
+                        currSelection={app.classes}
+                        availableOptions={CLASSES}
                         handleMultiSelect={handleMultiSelect}
                     />
                     <DisplayMultiSelect
@@ -223,7 +216,11 @@ const AppEdit = ({ _id }) => {
                     />
                     {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
                     <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
-                    <Row style={{ border: "solid 1px grey" }} />
+                    <Row>
+                        <Col xs={{ span: 2, offset: 10 }} style={{ display: "flex", alignItems: "center" }}>
+                            <Button onClick={() => handleSubmission()}>Speichern</Button>
+                        </Col>
+                    </Row>
                 </>
             ) : (
                 "Not loaded"
