@@ -34,11 +34,11 @@ const App = ({ app, router }) => {
 
 const filterMatching = ({ apps, applicableFilter, field }) => {
     if (applicableFilter.length > 0) {
-        console.log(apps,applicableFilter,field)
+        console.log(apps, applicableFilter, field);
         const res = [...apps.filter((app) => app[field].filter((_) => applicableFilter.includes(_)).length > 0)];
         return res;
     } else {
-        return apps
+        return apps;
     }
 };
 
@@ -70,9 +70,9 @@ const Overview = () => {
             const { name, subjects, schoolTypes, classes, useCase } = filterSettings;
             let filteredApps = [...apps];
             if (name) {
-                filteredApps = [...filteredApps.filter((app) => app.name.includes(name))];
+                filteredApps = [...filteredApps.filter((app) => app.name.toLowerCase().includes(name.toLowerCase()))];
             }
-            
+
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: subjects, field: "subjects" });
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: schoolTypes, field: "schoolTypes" });
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: classes, field: "classes" });
