@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema(
         name: {
             type: String,
         },
+        description: {
+            type: String,
+        },
         classification: {
             type: {
                 type: String,
@@ -80,8 +83,8 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.methods.public = function () {
-    const { _id, classification, name, email, permissions } = this.toObject();
-    return { _id, classification, name, email, permissions };
+    const { _id, classification, name, email, permissions, description } = this.toObject();
+    return { _id, classification, name, email, permissions, description };
 };
 
 UserSchema.methods.tokenInfo = function () {

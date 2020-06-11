@@ -7,7 +7,7 @@ import { DividerRow } from "../styles";
 
 import ShareButtons from "../ShareButtons";
 
-import { ReferalSymbol, UserSymbol, MailSymbol, PhoneSymbol, KeySymbol,  ResponsiveHeader4, MarginedRow } from "./styles";
+import { ReferalSymbol, DescriptionSymbol, UserSymbol, MailSymbol, PhoneSymbol, KeySymbol,  ResponsiveHeader4, MarginedRow } from "./styles";
 
 
 const Profile = () => {
@@ -59,14 +59,37 @@ const Profile = () => {
         )
     }
 
+    const inputArea = (symbol, placeholder, targetField) => {
+        return (
+            <MarginedRow>
+                <Col xs="2" sm="1">
+                    <Form.Label>
+                        {symbol}
+                    </Form.Label>
+                </Col>
+                <Col xs="10" sm="11">
+                    <Form.Control
+                        id={targetField}
+                        type="text"
+                        as="textarea"
+                        rows={5}
+                        placeholder={placeholder}
+                        onChange={(e) => onChange(e, targetField)}
+                    />
+                </Col>
+            </MarginedRow>
+        )
+    }
+
     return (
         <Container>
             <DividerRow />
             <div style={{ maxWidth: "600px", margin: "auto", color: "lightgrey" }}>
-                <ResponsiveHeader4>User Data:</ResponsiveHeader4>
+                <ResponsiveHeader4>Benutzerdaten:</ResponsiveHeader4>
                 <Form>
                     <Form.Group>
                         {inputField(<UserSymbol />, user?.data?.name || "Name", "name")}
+                        {inputArea(<DescriptionSymbol />, user?.data?.description || "Noch keine Beschreibung", "description")}
                         {inputField(<MailSymbol />, user?.data?.email, "email")}
                         {inputField(<PhoneSymbol />, user?.data?.phoneNumber || "No Number yet", "phoneNumber")}
                         {inputField(<KeySymbol />, user?.data?.permissions?.role || "No role yet", "permissions.role")}

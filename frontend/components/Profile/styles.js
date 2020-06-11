@@ -4,8 +4,13 @@ import { Row } from "react-bootstrap";
 import { FaUserFriends, FaUserAlt, FaPhone } from "react-icons/fa";
 import { GoMail } from "react-icons/go"
 import { GiHouseKeys } from "react-icons/gi"
+import { MdDescription } from "react-icons/md"
 
 export const ReferalSymbol = styled(FaUserFriends)`
+    font-size: 160%;
+`;
+
+export const DescriptionSymbol = styled(MdDescription)`
     font-size: 160%;
 `;
 
@@ -30,5 +35,5 @@ export const ResponsiveHeader4 = styled("h4")`
 `;
 
 export const MarginedRow = styled(Row)`
-    padding: 20px 0px;
+    padding: 5px 0px;
 `;

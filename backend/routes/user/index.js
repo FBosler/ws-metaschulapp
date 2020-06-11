@@ -82,7 +82,7 @@ router.get("/fetch_unassigned_user", (req, res) => {
 
 router.post("/assign", (req, res) => {
     if (isRole(req, "admin")) {
-        console.log("in admin",req.body);
+        console.log("in admin", req.body);
         const { toBeAssigned, assignedTo } = req.body;
         User.findById(toBeAssigned).then((user) => {
             if (!user) {
@@ -105,7 +105,7 @@ router.post("/assign", (req, res) => {
 });
 
 const updateUser = (updates, user) => {
-    const acceptedUpdates = ["phoneNumber", "name", "email", "permissions", "classification"];
+    const acceptedUpdates = ["phoneNumber", "name", "email", "permissions", "classification", "description"];
     acceptedUpdates.forEach((updateField) => {
         if (updates[updateField]) {
             user[updateField] = updates[updateField];
@@ -167,7 +167,7 @@ router.get("/confirm/:id", (req, res) => {
 });
 
 router.get("/:_id", async (req, res) => {
-    console.log('in fetching userhere')
+    console.log("in fetching userhere");
     if (ensureLoggedIn(req, res)) {
         const _id = req.params._id;
         const [err, user] = await to(User.findById(_id));

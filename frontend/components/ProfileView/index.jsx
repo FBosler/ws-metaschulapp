@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 import { DividerRow } from "../styles";
-import {
-    ResponsiveHeader4,
-} from "../Profile/styles";
+import { ResponsiveHeader4 } from "../Profile/styles";
 
 import { SendSymbol } from "./styles";
 
@@ -35,13 +33,14 @@ const ProfileView = ({ id }) => {
                 </Col>
                 <Col xs={12}>
                     <p>
-                        Beschreibung: {user.name} ist super, toller Lehrer. s finibus elit. Maecenas et pretium sem.
+                        {user.description ??
+                            `Beschreibung: ${user.name} ist super, toller Lehrer. s finibus elit. Maecenas et pretium sem.
                         Proin faucibus leo at turpis pharetra, non rutrum dui eleifend. Mauris varius ante id justo
                         iaculis, vitae commodo risus congue. Pellentesque at augue et magna blandit euismod sed eget
-                        enim. Donec in aliquet neque.
+                        enim. Donec in aliquet neque.`}
                     </p>
                 </Col>
-                <Col xs={12} style={{marginBottom: "10px"}}>
+                <Col xs={12} style={{ marginBottom: "10px" }}>
                     <Button>
                         Nachricht schicken! <SendSymbol />
                     </Button>
