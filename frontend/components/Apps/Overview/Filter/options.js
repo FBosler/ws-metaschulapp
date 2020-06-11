@@ -1,3 +1,13 @@
+export const PLATFORMS = ["iOS", "Android", "Windows", "Mac OS", "Linux"];
+
+export const BROWSERS = ["Chrome", "Firefox", "Safari", "Edge"];
+
+export const APPTYPES = ["Web-Plattform", "native App", "Web-App", "YouTube-Channel", "Softwareprogramm"];
+
+export const STORES = ["Apple App-Store", "Google Play"];
+
+export const LICENSES = ["Einzellizenz", "offene Lizenz", "Schullizenz", "Klassenlizenz", "Fachschaftslizenz"];
+
 export const SCHOOLTYPES = [
     "Gymnasium",
     "Gesamtschule",
@@ -66,4 +76,26 @@ export const USECASE = [
     "Unterrichtsvorbereitung",
     "Unterrichtsdurchführung",
     "Fortbildung für Lehrer*innen",
+];
+
+export const TEACHINGPHASES = [
+    "Anwenden",
+    "Einführen",
+    "Erarbeiten",
+    "Hausaufgaben",
+    "Produkt wird nicht im Unterricht eingesetzt",
+    "Testen",
+    "Üben",
+];
+
+export const DIDACTICS = [
+    "Einzelarbeit",
+    "Gruppenarbeit",
+    "Inklusion",
+    "Projekt",
+    "Quiz",
+    "Spiel",
+    "Vertretungsstunde",
+    "flipped classroom",
+    "offener Unterricht",
 ];
