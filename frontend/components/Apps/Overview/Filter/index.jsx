@@ -73,7 +73,7 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                     />
                     <Col xs="auto">
                         <Form.Group controlId="name">
-                            <Form.Label>App Name:</Form.Label>
+                            <Form.Label>Oder Du kennst den Namen sogar schon?</Form.Label>
                             <Form.Control
                                 value={filterSettings.name}
                                 onChange={(e) => {

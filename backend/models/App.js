@@ -126,6 +126,8 @@ const AppSchema = new mongoose.Schema(
         supportedBrowser: { type: [String], enum: BROWSERS },
         requiresInternet: { type: Boolean },
         offlineModeAvailable: { type: Boolean },
+        overallRating: { type: Number },
+        numberOfRatings: { type: Number },
         ratings: { type: [RatingSchema] },
         appTypes: { type: [String], enum: APPTYPES },
         stores: { type: [String], enum: STORES },

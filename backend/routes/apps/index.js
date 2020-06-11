@@ -20,7 +20,20 @@ router.get("/:_id", async (req, res) => {
 
         if (_id === "all") {
             const [err, allApps] = await to(
-                App.find({}, { _id: 1, useCase: 1, name: 1, schoolTypes: 1, classes: 1, subjects: 1, ratings: 1 })
+                App.find(
+                    {},
+                    {
+                        _id: 1,
+                        useCase: 1,
+                        name: 1,
+                        schoolTypes: 1,
+                        classes: 1,
+                        subjects: 1,
+                        ratings: 1,
+                        overallRating: 1,
+                        numberOfRatings: 1,
+                    }
+                )
             );
             if (err) {
                 res.status(400).json({ data: {}, errors: err });
@@ -41,7 +54,7 @@ router.get("/:_id", async (req, res) => {
 router.post("/update", async (req, res) => {
     if (ensureLoggedIn(req, res)) {
         const { app } = req.body;
-        [err, update] = await to(App.findOneAndUpdate({'_id':app._id},app,{new: true, overwrite:true}))
+        [err, update] = await to(App.findOneAndUpdate({ _id: app._id }, app, { new: true, overwrite: true }));
         if (err) {
             res.status(400).json({ data: {}, errors: err });
         } else {

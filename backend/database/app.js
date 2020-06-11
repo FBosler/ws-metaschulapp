@@ -10,6 +10,8 @@ async function fetchAllApps() {
     return await App.find({}).exec();
 }
 
+const average = list => list.reduce((prev, curr) => prev + curr) / list.length;
+
 async function rateApp({ appId, userId, rating, comment }) {
     console.log(appId, userId, rating, comment);
     return new Promise(async (resolve, reject) => {
@@ -42,6 +44,10 @@ async function rateApp({ appId, userId, rating, comment }) {
         };
 
         app.ratings.push(newRating);
+
+        // calc new overall rating
+        app.overallRating = average(app.ratings.map(_ => _.value))
+        app.numberOfRatings = app.ratings.length
 
         const [updateErr, update] = await to(app.save());
         if (updateErr) {

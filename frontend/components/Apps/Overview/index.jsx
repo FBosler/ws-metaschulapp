@@ -8,6 +8,7 @@ import ReactStars from "react-stars";
 import Filter from "./Filter";
 
 const App = ({ app, router }) => {
+    console.log(app);
     return (
         <Col xs={6} md={4} style={{ paddingLeft: "5px", paddingRight: "5px", marginBottom: "5px" }}>
             <Card style={{ width: "100%" }} key={app._id} onClick={() => router.push(`/../apps/${app._id}`)}>
@@ -15,7 +16,14 @@ const App = ({ app, router }) => {
                     <Card.Title style={{ marginBottom: "5px" }}>
                         <b>{app.name}</b>
                     </Card.Title>{" "}
-                    <ReactStars count={5} size={24} value={4} color2={"#ffd700"} edit={false} />
+                    {app.overallRating ? (
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems:"center" }}>
+                            <ReactStars count={5} size={24} value={app.overallRating} color2={"#ffd700"} edit={false} />
+                            <div>({app.numberOfRatings})</div>
+                        </div>
+                    ) : (
+                        "Noch keine Bewertungen"
+                    )}
                     <SelectionContainer>
                         {app.useCase.map((_) => {
                             if (_ === "Unterrichtsdurchführung") {
@@ -34,7 +42,6 @@ const App = ({ app, router }) => {
 
 const filterMatching = ({ apps, applicableFilter, field }) => {
     if (applicableFilter.length > 0) {
-        console.log(apps, applicableFilter, field);
         const res = [...apps.filter((app) => app[field].filter((_) => applicableFilter.includes(_)).length > 0)];
         return res;
     } else {
