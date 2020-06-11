@@ -139,7 +139,9 @@ const App = ({ _id }) => {
                                             </Link>
                                         </b>
                                     </Col>
-                                    <Col xs={12}>{rating.comment}</Col>
+                                    <Col xs={12}>
+                                        <div dangerouslySetInnerHTML={{ __html: rating.comment }} />
+                                    </Col>
                                     <br />
                                 </Row>
                                 {loggedInUserId === rating.byId ? (
@@ -167,7 +169,14 @@ const App = ({ _id }) => {
                             <Button onClick={() => router.push(`/apps/${router.query._id}/edit`)}>Edit</Button>
                         </Col>
                     </Row>
-                    <Block label={"Beschreibung"} content={app.description} />
+                    <Row style={{ marginBottom: "10px" }}>
+                        <Col>
+                            <>
+                                <h2>Beschreibung: </h2>
+                                <div dangerouslySetInnerHTML={{__html: app.description}}/>
+                            </>
+                        </Col>
+                    </Row>
                     <Block label={"Webpage"} content={app.url} type="link" />
                     <Block label={"Erklärvideo"} content={app.explanationUrl} type="link" />
                     <List label={"Unterstützte Browser"} content={app.supportedBrowser} />
