@@ -44,7 +44,7 @@ const Navbar = () => {
             <StyledNav.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <NavDropdown title="Menu" id="basic-nav-dropdown">
-                        <NavDropdown.Item href={`${baseUrl}/profile`}>Profile</NavDropdown.Item>
+                        <NavDropdown.Item href={`${baseUrl}/profile`}>Profil</NavDropdown.Item>
                         <NavDropdown.Item href={`${baseUrl}/overview`}>Übersicht</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>

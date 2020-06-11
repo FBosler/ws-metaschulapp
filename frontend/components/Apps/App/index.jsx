@@ -176,7 +176,7 @@ const App = ({ _id }) => {
                     <List label={"Klassen"} content={app.subjects} />
                     <List label={"Anwendungsfälle"} content={app.useCase} />
                     <List label={"Lehrphasen"} content={app.teachingPhases} />
-                    <List label={"Lehrmethoden"} content={app.didactics} />
+                    <List label={"Sozialform"} content={app.didactics} />
                     {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
                     <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
                     <Row style={{ border: "solid 1px grey" }} />
@@ -184,7 +184,7 @@ const App = ({ _id }) => {
                     <Comment app={app} setApp={setApp} />
                 </>
             ) : (
-                "Not loaded"
+                "Bitte einloggen, um die App zu sehen!"
             )}
         </>
     );

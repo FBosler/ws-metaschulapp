@@ -9,16 +9,16 @@ export const STORES = ["Apple App-Store", "Google Play"];
 export const LICENSES = ["Einzellizenz", "offene Lizenz", "Schullizenz", "Klassenlizenz", "Fachschaftslizenz"];
 
 export const SCHOOLTYPES = [
-    "Gymnasium",
-    "Gesamtschule",
-    "Realschule",
-    "Schule mit mehreren Bildungsgängen",
-    "Hauptschule",
-    "Berufliche Schule",
+    "Kindergarten",
     "Grundschule",
     "Förderschule",
+    "Hauptschule",
+    "Realschule",
+    "Gesamtschule",
+    "Gymnasium",
+    "Schule mit mehreren Bildungsgängen",
+    "Berufliche Schule",
     "Erwachsenenbildung",
-    "Kindergarten",
 ];
 
 export const CLASSES = [
@@ -91,7 +91,6 @@ export const TEACHINGPHASES = [
 export const DIDACTICS = [
     "Einzelarbeit",
     "Gruppenarbeit",
-    "Inklusion",
     "Projekt",
     "Quiz",
     "Spiel",

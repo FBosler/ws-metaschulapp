@@ -19,7 +19,9 @@ const MultiSelect = ({ controlId, label, options, handleChange }) => {
     return (
         <Col xs="auto">
             <Form.Group controlId={controlId}>
-                <Form.Label>{label}</Form.Label>
+                <Form.Label>
+                    <span style={{ fontWeight: "bolder" }}>{label}</span>
+                </Form.Label>
                 <Form.Control as="select" multiple onChange={(e) => handleChange(e, controlId)}>
                     {mapOptions(options)}
                 </Form.Control>
@@ -30,7 +32,7 @@ const MultiSelect = ({ controlId, label, options, handleChange }) => {
 
 // And now we can use these
 const Filter = ({ filterSettings, setFilterSettings }) => {
-    const [showFilter, setShowFilter] = useState(false);
+    const [showFilter, setShowFilter] = useState(true);
 
     const handleChange = (e, targetField) => {
         const selected = Array.from(e.target.selectedOptions, (option) => option.value);
@@ -45,7 +47,7 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
         <>
             {showFilter ? (
                 <Form>
-                    <Row className="align-items-center">
+                    <Row className="align-items-center" style={{paddingTop:"15px"}}>
                         <MultiSelect
                             filterSettings={filterSettings}
                             controlId="schoolTypes"
@@ -76,7 +78,9 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                         />
                         <Col xs="auto">
                             <Form.Group controlId="name">
-                                <Form.Label>Oder Du kennst den Namen sogar schon?</Form.Label>
+                                <Form.Label>
+                                    <span style={{ fontWeight: "bolder" }}>Oder Du kennst den Namen sogar schon?</span>
+                                </Form.Label>
                                 <Form.Control
                                     value={filterSettings.name}
                                     onChange={(e) => {
@@ -101,7 +105,7 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                 </Form>
             ) : (
                 <h2 onClick={() => setShowFilter((showFilter) => !showFilter)}>
-                    Für Filtermöglichkeiten <span style={{color: "blue", fontWeight:"900"}}>hier</span> klicken
+                    Für Filtermöglichkeiten <span style={{ color: "blue", fontWeight: "900" }}>hier</span> klicken
                 </h2>
             )}
         </>

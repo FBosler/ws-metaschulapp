@@ -5,6 +5,8 @@ import { Row, Col, Card } from "react-bootstrap";
 import { useRouter } from "next/router";
 import ReactStars from "react-stars";
 
+import { DividerRow } from "../../styles";
+
 import Filter from "./Filter";
 
 const App = ({ app, router }) => {
@@ -105,7 +107,7 @@ const Overview = () => {
     return (
         <>
             <Filter {...{ filterSettings, setFilterSettings }} />
-
+            <DividerRow style={{marginBottom: "10px"}}/>
             {filteredApps ? (
                 <Row style={{ marginLeft: "-5px", marginRight: "-5px" }}>
                     {filteredApps.map((_) => (
