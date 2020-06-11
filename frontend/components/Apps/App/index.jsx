@@ -159,18 +159,22 @@ const App = ({ _id }) => {
                                     <Col xs={12}>{rating.comment}</Col>
                                     <br />
                                 </Row>
-                                <Row style={{ marginBottom: "10px" }}>
-                                    <Col xs={12}>
-                                        <div
-                                            style={{
-                                                display: "flex",
-                                                flexDirection: "row-reverse",
-                                            }}
-                                        >
-                                            <Button onClick={() => deleteComment(rating.byId)}>Löschen</Button>
-                                        </div>
-                                    </Col>
-                                </Row>
+                                {loggedInUserId === rating.byId ? (
+                                    <Row style={{ marginBottom: "10px" }}>
+                                        <Col xs={12}>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    flexDirection: "row-reverse",
+                                                }}
+                                            >
+                                                <Button onClick={() => deleteComment(rating.byId)}>Löschen</Button>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                ) : (
+                                    ""
+                                )}
                             </StyledComment>
                         ))}
                     </Row>
