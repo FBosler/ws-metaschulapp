@@ -65,7 +65,7 @@ const Landing = () => {
                         wissen, wie sie am besten zur Veränderung beitragen können.
                     </p>
 
-                    <h1>Lösungsbeschreibung:</h1>
+                    <h2>Lösungsbeschreibung:</h2>
 
                     <h2>Was ist unser Lösungsansatz?</h2>
 
