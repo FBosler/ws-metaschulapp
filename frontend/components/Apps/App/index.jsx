@@ -112,32 +112,10 @@ const App = ({ _id }) => {
         <>
             {app ? (
                 <>
-                    <Row>
-                        <Col xs={10}>
-                            <b style={{ fontSize: "240%" }}>{app.name}</b>
-                        </Col>
-                        <Col xs={2} style={{ display: "flex", alignItems: "center" }}>
-                            <Button onClick={() => router.push(`/apps/${router.query._id}/edit`)}>Edit</Button>
-                        </Col>
-                    </Row>
-                    <Block label={"Beschreibung"} content={app.description} />
-                    <Block label={"Webpage"} content={app.url} type="link" />
-                    <Block label={"Erklärvideo"} content={app.explanationUrl} type="link" />
-                    <List label={"Unterstützte Browser"} content={app.supportedBrowser} />
-                    <List label={"App Typen"} content={app.appTypes} />
-                    <List label={"Schul Typen"} content={app.schoolTypes} />
-                    <List label={"Klassen"} content={app.subjects} />
-                    <List label={"Anwendungsfälle"} content={app.useCase} />
-                    <List label={"Lehrphasen"} content={app.teachingPhases} />
-                    <List label={"Lehrmethoden"} content={app.didactics} />
-                    {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
-                    <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
-                    <Row style={{ border: "solid 1px grey" }} />
-                    <h1>Kommentare & Bewertungen:</h1>
-                    <Comment app={app} setApp={setApp} />
-                    <Row>
+                    <b style={{ fontSize: "240%" }}>Erfahrungen mit "{app.name}"</b>
+                    <Row style={{ padding: "15px" }}>
                         {app.ratings.map((rating) => (
-                            <StyledComment className="z-depth-1" key={rating._id}>
+                            <StyledComment xs={12} className="z-depth-1" key={rating._id}>
                                 <Row>
                                     <Col
                                         xs={12}
@@ -183,6 +161,27 @@ const App = ({ _id }) => {
                             </StyledComment>
                         ))}
                     </Row>
+                    <Row style={{ border: "solid 1px grey" }} />
+                    <Row style={{ marginTop: "10px" }}>
+                        <Col xs={{ span: 2, offset: 10 }} style={{ display: "flex", alignItems: "center" }}>
+                            <Button onClick={() => router.push(`/apps/${router.query._id}/edit`)}>Edit</Button>
+                        </Col>
+                    </Row>
+                    <Block label={"Beschreibung"} content={app.description} />
+                    <Block label={"Webpage"} content={app.url} type="link" />
+                    <Block label={"Erklärvideo"} content={app.explanationUrl} type="link" />
+                    <List label={"Unterstützte Browser"} content={app.supportedBrowser} />
+                    <List label={"App Typen"} content={app.appTypes} />
+                    <List label={"Schul Typen"} content={app.schoolTypes} />
+                    <List label={"Klassen"} content={app.subjects} />
+                    <List label={"Anwendungsfälle"} content={app.useCase} />
+                    <List label={"Lehrphasen"} content={app.teachingPhases} />
+                    <List label={"Lehrmethoden"} content={app.didactics} />
+                    {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
+                    <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
+                    <Row style={{ border: "solid 1px grey" }} />
+                    <h1>Eigene Bewertung schreiben:</h1>
+                    <Comment app={app} setApp={setApp} />
                 </>
             ) : (
                 "Not loaded"

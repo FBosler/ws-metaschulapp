@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { LandingBackground, PaddedCol, ResponsiveHeader2, FullRow } from "./styles";
 import SignupLoginModal from "../SignupLoginModal";
+
+import Link from "next/link";
 
 const URL = "https://cdn.pixabay.com/photo/2014/05/18/19/15/lecture-hall-347316_1280.jpg";
 
@@ -20,6 +22,23 @@ const Landing = () => {
             </LandingBackground>
 
             <Container>
+                <Row>
+                    <Col xs={4}>
+                        <Link href="https://devpost.com/software/die-schulentwickler" prefetch={false}>
+                            <a>DevPost</a>
+                        </Link>
+                    </Col>
+                    <Col xs={4}>
+                        <Link href="https://trello.com/b/N39Kf6bD/hackathon-board" prefetch={false}>
+                            <a>Trello</a>
+                        </Link>
+                    </Col>
+                    <Col xs={4}>
+                        <Link href="https://www.youtube.com/watch?v=UeZgR_W-vYk&feature=youtu.be" prefetch={false}>
+                            <a>YouTube</a>
+                        </Link>
+                    </Col>
+                </Row>
                 <div>
                     <h2>Warum haben wir uns für diese Herausforderung entschieden?</h2>
 

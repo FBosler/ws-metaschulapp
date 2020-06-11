@@ -35,9 +35,7 @@ export const DivCenterContent = styled("div")`
 `;
 
 export const StyledComment = styled(Col)`
-    position: relative;
     border-radius: 6px;
     background-color: #f9ef8c;
-    margin: 15px;
-    border: solid 1px grey
+    border: solid 1px grey;
 `;
