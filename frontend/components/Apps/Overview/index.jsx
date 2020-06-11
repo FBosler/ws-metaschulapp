@@ -64,7 +64,15 @@ const Overview = () => {
         axios
             .get(`/api/apps/all`, { withCredentials: true })
             .then((res) => {
-                setApps(res.data.data);
+                let {
+                    data: { data: receivedApps },
+                } = res;
+                receivedApps = receivedApps.sort((a, b) => {
+                    const a_val = a.numberOfRatings ?? -100;
+                    const b_val = b.numberOfRatings ?? -100;
+                    return b_val - a_val;
+                });
+                setApps(receivedApps);
             })
             .catch((err) => {
                 console.log(err);
@@ -83,6 +91,12 @@ const Overview = () => {
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: schoolTypes, field: "schoolTypes" });
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: classes, field: "classes" });
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: useCase, field: "useCase" });
+
+            filteredApps = filteredApps.sort((a, b) => {
+                const a_val = a.numberOfRatings ?? -100;
+                const b_val = b.numberOfRatings ?? -100;
+                return b_val - a_val;
+            });
 
             setFilteredApps(filteredApps);
         }
