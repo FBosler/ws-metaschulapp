@@ -47,7 +47,7 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
         <>
             {showFilter ? (
                 <Form>
-                    <Row className="align-items-center" style={{paddingTop:"15px"}}>
+                    <Row className="align-items-center" style={{ paddingTop: "15px" }}>
                         <MultiSelect
                             filterSettings={filterSettings}
                             controlId="schoolTypes"
@@ -104,9 +104,13 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                     </Row>
                 </Form>
             ) : (
-                <h2 onClick={() => setShowFilter((showFilter) => !showFilter)}>
-                    Für Filtermöglichkeiten <span style={{ color: "blue", fontWeight: "900" }}>hier</span> klicken
-                </h2>
+                <div
+                    onClick={() => setShowFilter((showFilter) => !showFilter)}
+                    style={{ paddingTop: "20px", paddingBottom: "10px"}}
+                >
+                    <h1 style={{fontWeight: "bolder" }}>Du weißt noch gar nicht, was du suchst?</h1>
+                    <span style={{fontSize:"150%"}}>-> Kein Problem, einfach <span style={{ color: "blue", fontWeight: "900" }}>hier</span> klicken.</span>
+                </div>
             )}
         </>
     );
