@@ -17,7 +17,17 @@ export default () => {
                     <a>Padlet</a>
                 </Link>
             </p>
-            <p>Genutzte Lernplattformen: LeseLudi , Antolin, Anton (auch als App erhältlich)</p>
+            <p>
+                Genutzte Lernplattformen: LeseLudi ,{" "}
+                <Link href="/apps/5ee0cb4dba2053f8743a169c">
+                    <a>Antolin</a>
+                </Link>
+                ,{" "}
+                <Link href="/apps/5ee0cb4dba2053f8743a16e0">
+                    <a>Anton</a>
+                </Link>{" "}
+                Anton (auch als App erhältlich)
+            </p>
             <p>
                 <span>
                     Ich habe in meiner 1. Klasse durch die Corona veränderten Umstände, vermehrt digitale Medien

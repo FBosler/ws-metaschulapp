@@ -41,13 +41,15 @@ const Navbar = () => {
             <StyledNav.Brand href="/">
                 <img alt="company logo" src="/assets/icons/logo192.png" width="30" height="30" className="d-inline-block align-top" />
             </StyledNav.Brand>
+            
             <StyledNav.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
+                <Nav>
                     <NavDropdown title="Menu" id="basic-nav-dropdown">
                         <NavDropdown.Item href={`${baseUrl}/profile`}>Profil</NavDropdown.Item>
                         <NavDropdown.Item href={`${baseUrl}/overview`}>Übersicht</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
+                <span style={{marginRight:"auto",marginLeft:"auto",fontSize:"130%"}}><b>Deutschlands größter Schulappvergleich</b></span>
                 {Logout}
                 {Login}
             </StyledNav.Collapse>
