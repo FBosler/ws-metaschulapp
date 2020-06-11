@@ -50,7 +50,7 @@ const filterMatching = ({ apps, applicableFilter, field }) => {
     }
 };
 
-const Overview = () => {
+const Overview = ({query}) => {
     const router = useRouter();
     const [apps, setApps] = useState(null);
     const [filteredApps, setFilteredApps] = useState(apps);
@@ -61,6 +61,17 @@ const Overview = () => {
         classes: [],
         useCase: [],
     });
+
+
+    useEffect(() => {
+        setFilterSettings({
+            name: "",
+            subjects: query.subjects ?? [],
+            schoolTypes: query.schoolTypes ?? [],
+            classes: query.classes ?? [],
+            useCase: query.useCase ?? [],
+        })
+    }, [query])
 
     useEffect(() => {
         axios
