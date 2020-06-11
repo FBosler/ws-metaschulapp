@@ -43,6 +43,34 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
         <>
             <Form>
                 <Row className="align-items-center">
+                <MultiSelect
+                        filterSettings={filterSettings}
+                        controlId="schoolTypes"
+                        handleChange={handleChange}
+                        label="Schultyp"
+                        options={SCHOOLTYPES}
+                    />
+                    <MultiSelect
+                        filterSettings={filterSettings}
+                        controlId="subjects"
+                        handleChange={handleChange}
+                        label="Fächer"
+                        options={SUBJECTS}
+                    />
+                    <MultiSelect
+                        filterSettings={filterSettings}
+                        controlId="classes"
+                        handleChange={handleChange}
+                        label="Klassen"
+                        options={CLASSES}
+                    />
+                    <MultiSelect
+                        filterSettings={filterSettings}
+                        controlId="useCase"
+                        handleChange={handleChange}
+                        label="Anwendungsgebiete"
+                        options={USECASE}
+                    />
                     <Col xs="auto">
                         <Form.Group controlId="name">
                             <Form.Label>App Name:</Form.Label>
@@ -61,34 +89,6 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                             />
                         </Form.Group>
                     </Col>
-                    <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="subjects"
-                        handleChange={handleChange}
-                        label="Fächer"
-                        options={SUBJECTS}
-                    />
-                    <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="schoolTypes"
-                        handleChange={handleChange}
-                        label="Schultyp"
-                        options={SCHOOLTYPES}
-                    />
-                    <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="classes"
-                        handleChange={handleChange}
-                        label="Klassen"
-                        options={CLASSES}
-                    />
-                    <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="useCase"
-                        handleChange={handleChange}
-                        label="Anwendungsgebiete"
-                        options={USECASE}
-                    />
                 </Row>
             </Form>
         </>
