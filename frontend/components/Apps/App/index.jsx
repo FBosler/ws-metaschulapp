@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { SelectionContainer, SelectionOption, StyledComment } from "./styles";
 import { Row, Col, Button } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import UserProvider from "../../../contexts/UserProvider";
 
 import Comment from "./Comment";
 import ReactStars from "react-stars";
@@ -11,7 +12,7 @@ import ReactStars from "react-stars";
 const Block = ({ label, content, type }) => {
     if (content) {
         return (
-            <Row style={{marginBottom: "10px"}}>
+            <Row style={{ marginBottom: "10px" }}>
                 <Col>
                     {type && type === "link" ? (
                         <Link href={content} prefetch={false}>
@@ -73,6 +74,7 @@ const List = ({ label, content }) => {
 const App = ({ _id }) => {
     const router = useRouter();
     const [app, setApp] = useState(null);
+    const { loggedInUserId } = useContext(UserProvider.context);
 
     useEffect(() => {
         if (_id) {
@@ -86,6 +88,25 @@ const App = ({ _id }) => {
                 });
         }
     }, [_id]);
+
+    async function deleteComment(createdBy) {
+        if (loggedInUserId === createdBy) {
+            console.log("will delete");
+            axios
+                .post(`/api/apps/remove_rating`, { appId: app._id }, { withCredentials: true })
+                .then((res) => {
+                    setApp((app) => {
+                        console.log(res.data.data);
+                        const updatedApp = { ...app };
+                        updatedApp.ratings = res.data.data;
+                        return updatedApp;
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }
 
     return (
         <>
@@ -117,24 +138,39 @@ const App = ({ _id }) => {
                     <Row>
                         {app.ratings.map((rating) => (
                             <StyledComment className="z-depth-1" key={rating._id}>
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "row-reverse",
-                                        justifyContent: "space-between",
-                                    }}
-                                >
-                                    <ReactStars
-                                        count={5}
-                                        size={24}
-                                        value={rating.value}
-                                        color2={"#ffd700"}
-                                        edit={false}
-                                    />
-                                    <b style={{ alignItems: "center", display: "flex" }}>Von: {rating.byName}</b>
-                                </div>
-                                {rating.comment}
-                                <br />
+                                <Row>
+                                    <Col
+                                        xs={12}
+                                        style={{
+                                            display: "flex",
+                                            flexDirection: "row-reverse",
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <ReactStars
+                                            count={5}
+                                            size={24}
+                                            value={rating.value}
+                                            color2={"#ffd700"}
+                                            edit={false}
+                                        />
+                                        <b style={{ alignItems: "center", display: "flex" }}>Von: {rating.byName}</b>
+                                    </Col>
+                                    <Col xs={12}>{rating.comment}</Col>
+                                    <br />
+                                </Row>
+                                <Row style={{ marginBottom: "10px" }}>
+                                    <Col xs={12}>
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                flexDirection: "row-reverse",
+                                            }}
+                                        >
+                                            <Button onClick={() => deleteComment(rating.byId)}>Löschen</Button>
+                                        </div>
+                                    </Col>
+                                </Row>
                             </StyledComment>
                         ))}
                     </Row>

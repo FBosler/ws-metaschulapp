@@ -10,10 +10,9 @@ async function fetchAllApps() {
     return await App.find({}).exec();
 }
 
-const average = list => list.reduce((prev, curr) => prev + curr) / list.length;
+const average = (list) => list.reduce((prev, curr) => prev + curr) / list.length;
 
 async function rateApp({ appId, userId, rating, comment }) {
-    console.log(appId, userId, rating, comment);
     return new Promise(async (resolve, reject) => {
         let err, app, user;
         [err, app] = await to(App.findById(appId));
@@ -46,15 +45,44 @@ async function rateApp({ appId, userId, rating, comment }) {
         app.ratings.push(newRating);
 
         // calc new overall rating
-        app.overallRating = average(app.ratings.map(_ => _.value))
-        app.numberOfRatings = app.ratings.length
+        app.overallRating = average(app.ratings.map((_) => _.value));
+        app.numberOfRatings = app.ratings.length;
 
         const [updateErr, update] = await to(app.save());
         if (updateErr) {
             return reject(updateErr);
         }
-        return resolve(update.ratings.slice(-1,)[0]);
+        return resolve(update.ratings.slice(-1)[0]);
     });
 }
 
-export { fetchAppById, fetchAllApps, rateApp };
+async function removeRating({ appId, userId }) {
+    return new Promise(async (resolve, reject) => {
+        let err, app;
+        [err, app] = await to(App.findById(appId));
+        if (err) {
+            return reject(err);
+        }
+
+        app.ratings = app.ratings.filter((rating) => String(rating.byId) !== userId);
+        console.log(app.ratings)
+        // calc new overall rating
+        if (app.ratings.length > 0) {
+            app.overallRating = average(app.ratings.map((_) => _.value));
+            app.numberOfRatings = app.ratings.length;
+        } else {
+            app.overallRating = undefined
+            app.numberOfRatings = undefined
+        }
+
+        console.log(app)
+
+        const [updateErr, update] = await to(app.save());
+        if (updateErr) {
+            return reject(updateErr);
+        }
+        return resolve(update.ratings);
+    });
+}
+
+export { fetchAppById, fetchAllApps, rateApp, removeRating };

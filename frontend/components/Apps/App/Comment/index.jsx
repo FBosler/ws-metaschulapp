@@ -33,7 +33,7 @@ const TimeStamp = (date) => {
     return <BottomRightCorner>{FormatDate(date)}</BottomRightCorner>;
 };
 
-const Comment = ({ app, setApp, msg }) => {
+const Comment = ({ app, setApp }) => {
     const [showNewMessage, setShowNewMessage] = useState(false);
     const [rating, setRating] = useState(null);
     const [comment, setComment] = useState("");
@@ -49,10 +49,7 @@ const Comment = ({ app, setApp, msg }) => {
                     setShowNewMessage(false)
                     setApp(app => {
                         const updatedApp = {...app}
-                        console.log(res)
-                        console.log(res.data)
                         updatedApp.ratings.push(res.data.data)
-                        console.log(updatedApp)
                         return updatedApp
                     })
                 })

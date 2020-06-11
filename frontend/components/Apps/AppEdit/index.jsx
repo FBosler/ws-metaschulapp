@@ -120,7 +120,7 @@ const AppEdit = ({ _id }) => {
         router.push(`${router.asPath}/..`);
         if (_id) {
             axios
-                .post(`/api/apps/update`, { app }, { withCredentials: true })
+                .post(`/api/apps/remove_rating`, { appId: app._id }, { withCredentials: true })
                 .then(() => {
                     router.push(`${router.asPath}/..`);
                 })

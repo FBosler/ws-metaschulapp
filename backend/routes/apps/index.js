@@ -8,7 +8,7 @@ import { isRole, signToken } from "../utils";
 import App from "../../models/App";
 import { ensureLoggedIn } from "../utils";
 
-import { rateApp } from "../../database/app";
+import { rateApp, removeRating } from "../../database/app";
 
 const router = express.Router();
 
@@ -75,5 +75,18 @@ router.post("/rate_app", async (req, res) => {
         }
     }
 });
+
+router.post("/remove_rating", async (req,res) => {
+    if (ensureLoggedIn(req, res)) {
+        const userId = req.user.id;
+        const { appId } = req.body;
+        const [err, update] = await to(removeRating({ appId, userId}));
+        if (err) {
+            res.status(400).json({ data: {}, errors: err });
+        } else {
+            res.status(200).json({ data: update, errors: "" });
+        }
+    }
+})
 
 export default router;
