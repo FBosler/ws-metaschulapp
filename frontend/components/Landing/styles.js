@@ -9,7 +9,7 @@ export const LandingBackground = styled("div")`
     border-bottom: grey 1px solid;
     height: 200px;
     ${device.lg} {
-        height: 600px;
+        height: 400px;
       }
 `;
 
