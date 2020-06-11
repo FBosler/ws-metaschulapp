@@ -17,8 +17,7 @@ export const SelectionOption = styled("div")`
     border-radius: 25px;
     margin: 0 0 5px 5px;
     background-color: white;
-    border: solid 2px;
-    color: blueviolet;
+    border: solid 2px #3AA4F3;
     text-align: center
 `
 

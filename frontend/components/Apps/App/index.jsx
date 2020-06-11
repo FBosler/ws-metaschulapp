@@ -115,7 +115,12 @@ const App = ({ _id }) => {
                     <b style={{ fontSize: "240%" }}>Erfahrungen mit "{app.name}"</b>
                     <Row style={{ padding: "15px" }}>
                         {app.ratings.map((rating) => (
-                            <StyledComment xs={12} className="z-depth-1" key={rating._id}>
+                            <StyledComment
+                                xs={12}
+                                className="z-depth-1"
+                                key={rating._id}
+                                style={{ marginBottom: "10px" }}
+                            >
                                 <Row>
                                     <Col
                                         xs={12}
@@ -173,7 +178,7 @@ const App = ({ _id }) => {
                         <Col>
                             <>
                                 <h2>Beschreibung: </h2>
-                                <div dangerouslySetInnerHTML={{__html: app.description}}/>
+                                <div dangerouslySetInnerHTML={{ __html: app.description }} />
                             </>
                         </Col>
                     </Row>
