@@ -1,10 +1,23 @@
 import React from "react";
-import Profile from "../components/Profile";
+import Link from "next/link";
 import { Container } from "react-bootstrap";
 
 export default () => {
     return (
         <Container>
+            <b>Michaela (39), Grundschullehrerin aus NRW.</b>
+            <br />
+            <p>Lerngruppe: 1.Klasse</p>
+            <p>Klassenstärke: 27 Kinder</p>
+            <p>Meine Funktion: Klassenlehrerin</p>
+            <p>Fach: Deutsch, Mathe, Sachunterricht, Kunst, Englisch</p>
+            <p>
+                Genutztes Tool:{" "}
+                <Link href="/apps/5ee0cb4dba2053f8743a171c">
+                    <a>Padlet</a>
+                </Link>
+            </p>
+            <p>Genutzte Lernplattformen: LeseLudi , Antolin, Anton (auch als App erhältlich)</p>
             <p>
                 <span>
                     Ich habe in meiner 1. Klasse durch die Corona veränderten Umstände, vermehrt digitale Medien
@@ -15,7 +28,9 @@ export default () => {
                     arbeite, benötigte ich ein Tool, dass mir genau diese Weiterarbeit auch auf Distanz
                     ermöglichte.&nbsp;Dabei stieß ich nach einiger Recherche auf{" "}
                 </span>
-                <a href="https://padlet.com">Padlet</a>
+                <Link href="/apps/5ee0cb4dba2053f8743a171c">
+                    <a>Padlet</a>
+                </Link>
                 <span>
                     &nbsp;. Mit Padlet&nbsp;können kollaborativ multimediale Pinnwände erstellt werden. Ich nutze das
                     Tool unter anderm als digitales Klassenzimmer, um mit den Kindern/Eltern in Kontakt zu bleiben und
