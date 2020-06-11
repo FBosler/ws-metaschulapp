@@ -54,7 +54,7 @@ router.get("/:_id", async (req, res) => {
 router.post("/update", async (req, res) => {
     if (ensureLoggedIn(req, res)) {
         const { app } = req.body;
-        [err, update] = await to(App.findOneAndUpdate({ _id: app._id }, app, { new: true, overwrite: true }));
+        const [err, update] = await to(App.findOneAndUpdate({ _id: app._id }, app, { new: true, overwrite: true }));
         if (err) {
             res.status(400).json({ data: {}, errors: err });
         } else {

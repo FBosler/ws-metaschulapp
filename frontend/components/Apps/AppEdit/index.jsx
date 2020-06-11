@@ -111,23 +111,22 @@ const AppEdit = ({ _id }) => {
     };
 
     const handleChange = (value, targetField) => {
+        console.log(value, targetField);
         const tmpApp = { ...app };
         tmpApp[targetField] = value;
+        console.log(tmpApp);
         setApp(tmpApp);
     };
 
     const handleSubmission = () => {
-        router.push(`${router.asPath}/..`);
-        if (_id) {
-            axios
-                .post(`/api/apps/remove_rating`, { appId: app._id }, { withCredentials: true })
-                .then(() => {
-                    router.push(`${router.asPath}/..`);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
+        axios
+            .post(`/api/apps/update`, {app: app}, { withCredentials: true })
+            .then(() => {
+                router.push(`${router.asPath}/..`);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (

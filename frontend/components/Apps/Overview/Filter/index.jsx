@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Row, Col } from "react-bootstrap";
 
 import { SCHOOLTYPES, CLASSES, SUBJECTS, USECASE } from "./options";
@@ -30,6 +30,8 @@ const MultiSelect = ({ controlId, label, options, handleChange }) => {
 
 // And now we can use these
 const Filter = ({ filterSettings, setFilterSettings }) => {
+    const [showFilter, setShowFilter] = useState(false);
+
     const handleChange = (e, targetField) => {
         const selected = Array.from(e.target.selectedOptions, (option) => option.value);
         setFilterSettings((settings) => {
@@ -41,56 +43,62 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
 
     return (
         <>
-            <Form>
-                <Row className="align-items-center">
-                <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="schoolTypes"
-                        handleChange={handleChange}
-                        label="Schultyp"
-                        options={SCHOOLTYPES}
-                    />
-                    <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="subjects"
-                        handleChange={handleChange}
-                        label="Fächer"
-                        options={SUBJECTS}
-                    />
-                    <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="classes"
-                        handleChange={handleChange}
-                        label="Klassen"
-                        options={CLASSES}
-                    />
-                    <MultiSelect
-                        filterSettings={filterSettings}
-                        controlId="useCase"
-                        handleChange={handleChange}
-                        label="Anwendungsgebiete"
-                        options={USECASE}
-                    />
-                    <Col xs="auto">
-                        <Form.Group controlId="name">
-                            <Form.Label>Oder Du kennst den Namen sogar schon?</Form.Label>
-                            <Form.Control
-                                value={filterSettings.name}
-                                onChange={(e) => {
-                                    e.persist();
-                                    setFilterSettings((settings) => {
-                                        const newSettings = { ...settings };
-                                        newSettings.name = e.target.value ?? "";
-                                        return newSettings;
-                                    });
-                                }}
-                                type="text"
-                                placeholder="Hier Name eingeben"
-                            />
-                        </Form.Group>
-                    </Col>
-                </Row>
-            </Form>
+            {showFilter ? (
+                <Form>
+                    <Row className="align-items-center">
+                        <MultiSelect
+                            filterSettings={filterSettings}
+                            controlId="schoolTypes"
+                            handleChange={handleChange}
+                            label="Schultyp"
+                            options={SCHOOLTYPES}
+                        />
+                        <MultiSelect
+                            filterSettings={filterSettings}
+                            controlId="subjects"
+                            handleChange={handleChange}
+                            label="Fächer"
+                            options={SUBJECTS}
+                        />
+                        <MultiSelect
+                            filterSettings={filterSettings}
+                            controlId="classes"
+                            handleChange={handleChange}
+                            label="Klassen"
+                            options={CLASSES}
+                        />
+                        <MultiSelect
+                            filterSettings={filterSettings}
+                            controlId="useCase"
+                            handleChange={handleChange}
+                            label="Anwendungsgebiete"
+                            options={USECASE}
+                        />
+                        <Col xs="auto">
+                            <Form.Group controlId="name">
+                                <Form.Label>Oder Du kennst den Namen sogar schon?</Form.Label>
+                                <Form.Control
+                                    value={filterSettings.name}
+                                    onChange={(e) => {
+                                        e.persist();
+                                        setFilterSettings((settings) => {
+                                            const newSettings = { ...settings };
+                                            newSettings.name = e.target.value ?? "";
+                                            return newSettings;
+                                        });
+                                    }}
+                                    type="text"
+                                    placeholder="Hier Name eingeben"
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </Form>
+            ) : (
+                <div onClick={() => setShowFilter((showFilter) => !showFilter)} style={{ fontSize: "150%" }}>
+                    Für Filtermöglichkeiten hier klicken
+                </div>
+            )}
         </>
     );
 };

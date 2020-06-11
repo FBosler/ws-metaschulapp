@@ -8,7 +8,6 @@ import ReactStars from "react-stars";
 import Filter from "./Filter";
 
 const App = ({ app, router }) => {
-    console.log(app);
     return (
         <Col xs={6} md={4} style={{ paddingLeft: "5px", paddingRight: "5px", marginBottom: "5px" }}>
             <Card style={{ width: "100%" }} key={app._id} onClick={() => router.push(`/../apps/${app._id}`)}>
@@ -17,7 +16,7 @@ const App = ({ app, router }) => {
                         <b>{app.name}</b>
                     </Card.Title>{" "}
                     {app.overallRating ? (
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems:"center" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <ReactStars count={5} size={24} value={app.overallRating} color2={"#ffd700"} edit={false} />
                             <div>({app.numberOfRatings})</div>
                         </div>
@@ -51,6 +50,7 @@ const filterMatching = ({ apps, applicableFilter, field }) => {
 
 const Overview = () => {
     const router = useRouter();
+    console.log(router.query);
     const [apps, setApps] = useState(null);
     const [filteredApps, setFilteredApps] = useState(apps);
     const [filterSettings, setFilterSettings] = useState({
@@ -99,7 +99,9 @@ const Overview = () => {
                     ))}
                 </Row>
             ) : (
-                <Card>stuff</Card>
+                <Row>
+                    <Col>Bitte einloggen, um eine Übersicht der vorhanden Apps zu sehen</Col>
+                </Row>
             )}
         </>
     );

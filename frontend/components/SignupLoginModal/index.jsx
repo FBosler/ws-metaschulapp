@@ -37,7 +37,7 @@ const SignUpLoginForm = () => {
             .post("/api/auth/register_login", userData)
             .then(res => {
                 contextUserData.updateUserState();
-                router.push(`/profile`);
+                router.push(`/overview`);
             })
             .catch(err => {
                 console.log(err);
