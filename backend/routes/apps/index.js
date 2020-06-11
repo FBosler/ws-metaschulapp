@@ -16,8 +16,6 @@ router.get("/:_id", async (req, res) => {
     if (ensureLoggedIn(req, res)) {
         const _id = req.params._id;
 
-        console.log("fetching");
-
         if (_id === "all") {
             const [err, allApps] = await to(
                 App.find(

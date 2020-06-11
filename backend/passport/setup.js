@@ -22,7 +22,7 @@ const findByEmailOrCreate = (email, req, profile, done) => {
     try {
         referredBy = _.isEmpty(req.query) || _.isEmpty(rawReferredBy) ? "" : JSON.parse(rawReferredBy.replace(/&#34;/g, '"')).referralCode;
     } catch(err) {
-        console.log(rawReferredBy)
+        console.log("in find email or create", rawReferredBy)
     }
     const name = profile.displayName || profile.username || profile.display_name;
 

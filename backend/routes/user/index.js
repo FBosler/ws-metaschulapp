@@ -1,18 +1,20 @@
 const conf = require("../../config/config");
 
-import express from "express"
-import chalk from "chalk"
-import _ from "lodash"
+import express from "express";
+import chalk from "chalk";
+import _ from "lodash";
 
-import { isRole, signToken } from "../utils"
+import { isRole, signToken } from "../utils";
 import User from "../../models/User";
+import { ensureLoggedIn } from "../utils";
+import { to } from "await-to-js";
 
 const router = express.Router();
+
 router.get("/logout", (req, res) => {
     if (req.user) {
         const userName = req.user.name;
         delete req.user;
-        console.log(req.user);
         return res
             .status(200)
             .clearCookie("jwt", { domain: conf.DOMAIN })
@@ -80,9 +82,8 @@ router.get("/fetch_unassigned_user", (req, res) => {
 
 router.post("/assign", (req, res) => {
     if (isRole(req, "admin")) {
-        console.log(req.body);
+        console.log("in admin",req.body);
         const { toBeAssigned, assignedTo } = req.body;
-        console.log(toBeAssigned, assignedTo);
         User.findById(toBeAssigned).then((user) => {
             if (!user) {
                 console.log(chalk.red(`User with the id: ${toBeAssigned} not found`));
@@ -111,7 +112,7 @@ const updateUser = (updates, user) => {
         }
     });
 
-    console.log("updates",updates)
+    console.log("updates", updates);
 
     // here deep update based on values in updates
 };
@@ -129,7 +130,7 @@ router.post("/update", (req, res) => {
                 console.log(chalk.red(`User with the id: ${id} not found`));
                 res.status(200).json({ errors: `User with the id: ${id} not found` });
             } else {
-                updateUser(req.body, user)
+                updateUser(req.body, user);
                 user.save()
                     .then(() => {
                         const token = signToken(user);
@@ -138,7 +139,7 @@ router.post("/update", (req, res) => {
                             .json(user.public());
                     })
                     .catch((err) => {
-                        console.log(err);
+                        console.log("in user update", err);
                     });
             }
         });
@@ -159,10 +160,23 @@ router.get("/confirm/:id", (req, res) => {
                     res.redirect(register_login);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    console.log("in confirm id", err);
                 });
         }
     });
+});
+
+router.get("/:_id", async (req, res) => {
+    console.log('in fetching userhere')
+    if (ensureLoggedIn(req, res)) {
+        const _id = req.params._id;
+        const [err, user] = await to(User.findById(_id));
+        if (err) {
+            res.status(400).json({ data: {}, errors: err });
+        } else {
+            res.status(200).json({ data: user.public(), errors: "" });
+        }
+    }
 });
 
 export default router;

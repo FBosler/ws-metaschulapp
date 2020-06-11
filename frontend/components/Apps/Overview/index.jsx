@@ -50,7 +50,6 @@ const filterMatching = ({ apps, applicableFilter, field }) => {
 
 const Overview = () => {
     const router = useRouter();
-    console.log(router.query);
     const [apps, setApps] = useState(null);
     const [filteredApps, setFilteredApps] = useState(apps);
     const [filterSettings, setFilterSettings] = useState({
@@ -92,6 +91,7 @@ const Overview = () => {
     return (
         <>
             <Filter {...{ filterSettings, setFilterSettings }} />
+
             {filteredApps ? (
                 <Row style={{ marginLeft: "-5px", marginRight: "-5px" }}>
                     {filteredApps.map((_) => (

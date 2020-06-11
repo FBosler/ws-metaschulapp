@@ -39,19 +39,18 @@ const Comment = ({ app, setApp }) => {
     const [comment, setComment] = useState("");
 
     function sendRating({ appId, rating, comment }) {
-
         if (rating && comment) {
             axios
                 .post("/api/apps/rate_app", { appId, rating, comment }, { withCredentials: true })
                 .then((res) => {
-                    setRating(null)
-                    setComment("")
-                    setShowNewMessage(false)
-                    setApp(app => {
-                        const updatedApp = {...app}
-                        updatedApp.ratings.push(res.data.data)
-                        return updatedApp
-                    })
+                    setRating(null);
+                    setComment("");
+                    setShowNewMessage(false);
+                    setApp((app) => {
+                        const updatedApp = { ...app };
+                        updatedApp.ratings.push(res.data.data);
+                        return updatedApp;
+                    });
                 })
                 .catch((err) => {
                     console.log(err);

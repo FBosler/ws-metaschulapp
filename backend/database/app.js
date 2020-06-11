@@ -65,7 +65,7 @@ async function removeRating({ appId, userId }) {
         }
 
         app.ratings = app.ratings.filter((rating) => String(rating.byId) !== userId);
-        console.log(app.ratings)
+        
         // calc new overall rating
         if (app.ratings.length > 0) {
             app.overallRating = average(app.ratings.map((_) => _.value));
@@ -75,7 +75,6 @@ async function removeRating({ appId, userId }) {
             app.numberOfRatings = undefined
         }
 
-        console.log(app)
 
         const [updateErr, update] = await to(app.save());
         if (updateErr) {

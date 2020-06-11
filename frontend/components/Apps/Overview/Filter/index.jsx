@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 
 import { SCHOOLTYPES, CLASSES, SUBJECTS, USECASE } from "./options";
 
@@ -92,12 +92,17 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                                 />
                             </Form.Group>
                         </Col>
+                        <Col>
+                            <Button onClick={() => setShowFilter((showFilter) => !showFilter)}>
+                                Filter Einklappen
+                            </Button>
+                        </Col>
                     </Row>
                 </Form>
             ) : (
-                <div onClick={() => setShowFilter((showFilter) => !showFilter)} style={{ fontSize: "150%" }}>
-                    Für Filtermöglichkeiten hier klicken
-                </div>
+                <h2 onClick={() => setShowFilter((showFilter) => !showFilter)}>
+                    Für Filtermöglichkeiten <span style={{color: "blue", fontWeight:"900"}}>hier</span> klicken
+                </h2>
             )}
         </>
     );

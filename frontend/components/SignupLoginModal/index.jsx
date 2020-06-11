@@ -36,8 +36,9 @@ const SignUpLoginForm = () => {
         axios
             .post("/api/auth/register_login", userData)
             .then(res => {
+                console.log(res)
                 contextUserData.updateUserState();
-                router.push(`/overview`);
+                router.push("/overview");
             })
             .catch(err => {
                 console.log(err);

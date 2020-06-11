@@ -154,7 +154,12 @@ const App = ({ _id }) => {
                                             color2={"#ffd700"}
                                             edit={false}
                                         />
-                                        <b style={{ alignItems: "center", display: "flex" }}>Von: {rating.byName}</b>
+                                        <b style={{ alignItems: "center", display: "flex" }}>
+                                            Von:<div style={{ marginRight: "5px" }}></div>
+                                            <Link href={`/profileview/${rating.byId}`} prefetch={true}>
+                                                <a> {rating.byName}</a>
+                                            </Link>
+                                        </b>
                                     </Col>
                                     <Col xs={12}>{rating.comment}</Col>
                                     <br />
