@@ -43,8 +43,15 @@ jobs:
                       FRONT_END_URL=https://www.metaschulapp.de
                       DOMAIN=.metaschulapp.de
                       EOT
-                      cat .env
-                      ls -a | cat
+
+            - run:
+                  name: Copy env file to production
+                  command: |
+                      if [ "${CIRCLE_BRANCH}" == "production" ]; then
+                        scp -o StrictHostKeyChecking=no .env ubuntu@3.121.195.172:/home/ubuntu/ws-metaschulapp
+                      else
+                        echo "NO DEPLOY (only deploying in staging and production)"
+                      fi
 
             - run:
                   name: Build and push Docker Image
