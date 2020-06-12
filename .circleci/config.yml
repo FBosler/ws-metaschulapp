@@ -13,8 +13,7 @@ jobs:
                       - "9c:55:04:22:6f:0c:30:c9:1e:da:ae:dd:aa:81:8a:86"
 
             - checkout
-            - setup_remote_docker:
-                docker_layer_caching: true
+            - setup_remote_docker
             # enable docker_layer_caching: true on better plan
 
             - restore_cache:
