@@ -6,6 +6,9 @@ if (process.env.NODE_ENV === "production") {
     dotenv.config({ path: "../.env.dev" });
 }
 
+
+
+
 const {
     MONGO_USERNAME,
     MONGO_PASSWORD,
@@ -14,7 +17,9 @@ const {
     MONGO_DB,
     JWT_SECRET,
     FRONT_END_URL,
-    DOMAIN
+    DOMAIN,
+    GOOGLE_LOGIN_KEY,
+    FACEBOOK_LOGIN_KEY
 } = process.env;
 
 const config = {
@@ -25,7 +30,9 @@ const config = {
     MONGO_DB,
     JWT_SECRET,
     FRONT_END_URL,
-    DOMAIN
+    DOMAIN,
+    GOOGLE_LOGIN_KEY,
+    FACEBOOK_LOGIN_KEY
 };
 
 if (process.env.NODE_ENV === "production") {

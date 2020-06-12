@@ -107,7 +107,7 @@ passport.use(
     new GoogleStrategy(
         {
             clientID: credentials.GOOGLE.client_id,
-            clientSecret: credentials.GOOGLE.client_secret,
+            clientSecret: conf.GOOGLE_LOGIN_KEY,
             callbackURL: generateCallbackURL('google'),
             passReqToCallback: true
         },
@@ -123,7 +123,7 @@ passport.use(
     new FacebookStrategy(
         {
             clientID: credentials.FACEBOOK.client_id,
-            clientSecret: credentials.FACEBOOK.client_secret,
+            clientSecret: conf.FACEBOOK_LOGIN_KEY,
             callbackURL: generateCallbackURL('facebook'),
             passReqToCallback: true,
             profileFields: [

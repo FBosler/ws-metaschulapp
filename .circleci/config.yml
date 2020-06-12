@@ -41,6 +41,8 @@ jobs:
                       JWT_SECRET=$(echo ${JWT_SECRET})
                       FRONT_END_URL=https://www.metaschulapp.de
                       DOMAIN=.metaschulapp.de
+                      FACEBOOK_LOGIN_KEY=$(echo ${FACEBOOK_LOGIN_KEY})
+                      GOOGLE_LOGIN_KEY=$(echo ${GOOGLE_LOGIN_KEY})
                       EOT
 
             - run:
