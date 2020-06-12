@@ -43,6 +43,7 @@ jobs:
                       DOMAIN=.metaschulapp.de
                       EOT
                       cat .env
+                      ls
 
             - run:
                   name: Build and push Docker Image
