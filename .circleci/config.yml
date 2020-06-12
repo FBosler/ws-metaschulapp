@@ -28,6 +28,23 @@ jobs:
                       sudo apt-get install awscli
                       sudo apt-get install python3-pip
                       sudo pip3 install --upgrade awscli
+
+            - run:
+                  name: Build .env file
+                  command: |
+                      cat <<EOT >> .env
+                      MONGO_HOSTNAME=db
+                      MONGO_USERNAME=admin
+                      MONGO_PASSWORD=echo ${MONGO_PASSWORD}
+                      MONGO_PORT=27017
+                      MONGO_DB=ws_metalearnapp
+                      JWT_SECRET=echo ${JWT_SECRET}
+                      
+                      FRONT_END_URL=https://www.metaschulapp.de
+                      DOMAIN=.metaschulapp.de
+                      EOT
+                      cat .env
+
             - run:
                   name: Build and push Docker Image
                   command: |
