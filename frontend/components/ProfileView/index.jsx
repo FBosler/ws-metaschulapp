@@ -26,35 +26,34 @@ const ProfileView = ({ id }) => {
 
     return (
         <Container>
-            <DividerRow />
-            <Row>
-                <Col xs={12}>
-                    <h3>Name: {user.name}</h3>
-                </Col>
-                <Col xs={12}>
-                    <p>
-                        {user.description ??
-                            `Beschreibung: ${user.name} ist super, toller Lehrer. s finibus elit. Maecenas et pretium sem.
-                        Proin faucibus leo at turpis pharetra, non rutrum dui eleifend. Mauris varius ante id justo
-                        iaculis, vitae commodo risus congue. Pellentesque at augue et magna blandit euismod sed eget
-                        enim. Donec in aliquet neque.`}
-                    </p>
-                </Col>
-                <Col xs={12} style={{ marginBottom: "10px" }}>
-                    <Button>
-                        Nachricht schicken! <SendSymbol />
-                    </Button>
-                </Col>
-            </Row>
-            <DividerRow />
-            <ResponsiveHeader4>
-                Teile das Profil von <b>{user.name}</b>
-            </ResponsiveHeader4>
-            <Row style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-                <div style={{ margin: "auto", maxWidth: "600px" }}>
-                    <ShareButtons />
-                </div>
-            </Row>
+            {user.name ? (
+                <>
+                    <Row>
+                        <Col xs={12}>
+                            <h3>Name: {user.name}</h3>
+                        </Col>
+                        <Col xs={12}>
+                            <p>{user.description}</p>
+                        </Col>
+                        <Col xs={12} style={{ marginBottom: "10px" }}>
+                            <Button>
+                                Nachricht schicken! <SendSymbol />
+                            </Button>
+                        </Col>
+                    </Row>
+                    <DividerRow />
+                    <ResponsiveHeader4>
+                        Teile das Profil von <b>{user.name}</b>
+                    </ResponsiveHeader4>
+                    <Row style={{ paddingTop: "20px", paddingBottom: "20px" }}>
+                        <div style={{ margin: "auto", maxWidth: "600px" }}>
+                            <ShareButtons />
+                        </div>
+                    </Row>
+                </>
+            ) : (
+                "Du musst dich einloggen, um die Profile anderer Nutzer zu sehen und ihnen Nachrichten zu schicken"
+            )}
         </Container>
     );
 };

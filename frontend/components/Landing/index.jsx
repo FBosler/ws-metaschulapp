@@ -23,23 +23,6 @@ const Landing = () => {
             </LandingBackground>
 
             <Container>
-                <Row>
-                    <Col xs={4}>
-                        <Link href="https://devpost.com/software/die-schulentwickler" prefetch={false}>
-                            <a>DevPost</a>
-                        </Link>
-                    </Col>
-                    <Col xs={4}>
-                        <Link href="https://trello.com/b/N39Kf6bD/hackathon-board" prefetch={false}>
-                            <a>Trello</a>
-                        </Link>
-                    </Col>
-                    <Col xs={4}>
-                        <Link href="https://www.youtube.com/watch?v=UeZgR_W-vYk&feature=youtu.be" prefetch={false}>
-                            <a>YouTube</a>
-                        </Link>
-                    </Col>
-                </Row>
                 <div>
                     <h2>Warum haben wir uns für diese Herausforderung entschieden?</h2>
 
@@ -160,7 +143,14 @@ const Landing = () => {
                         Was benötigt Ihr für den nächsten Schritt (Ressourcen, Know-How, Budget)? Seid ihr als
                         Projektteam selbst an der Umsetzung interessiert? Wenn ja, wer hat welche Rolle in Eurem Team?
                     </p>
-                </div>
+                </div>{" "}
+                <Row>
+                    <Col xs={4}>
+                        <Link href="https://devpost.com/software/die-schulentwickler" prefetch={false}>
+                            <a>DevPost</a>
+                        </Link>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );
