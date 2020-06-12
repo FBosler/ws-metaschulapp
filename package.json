@@ -1,9 +1,9 @@
 {
-    "name": "social-login-root-folder",
+    "name": "ws-metashulapp-root",
     "version": "1.0.0",
     "description": "This is the root project for our frontend and backend",
     "main": "index.js",
-    "repository": "https://github.com/FBosler/fb-tutorial-social-login",
+    "repository": "https://github.com/FBosler/ws-metaschulapp",
     "author": "Fabian Bosler",
     "license": "MIT",
     "private": true,

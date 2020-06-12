@@ -27,6 +27,7 @@ const CLASSES = [
     "1./2. Schuljahr",
     "3./4. Schuljahr",
     "5./6. Schuljahr",
+    "7./8. Schuljahr",
     "9./10. Schuljahr",
     "Sekundarstufe II",
     "Lebenslanges Lernen",

@@ -39,7 +39,7 @@ const Navbar = () => {
     return (
         <StyledNav sticky="top">
             <StyledNav.Brand href="/">
-                <img alt="company logo" src="/assets/icons/logo192.png" width="30" height="30" className="d-inline-block align-top" />
+                <img alt="company logo" src="/assets/icons/logo224.png" width="30" height="30" className="d-inline-block align-top" />
             </StyledNav.Brand>
             
             <StyledNav.Collapse id="basic-navbar-nav">
