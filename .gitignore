@@ -20,6 +20,9 @@ frontend/.next/
 client/build
 /build
 
+# credentials
+.env
+
 # misc
 .DS_Store
 .vscode/
