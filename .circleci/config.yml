@@ -13,7 +13,8 @@ jobs:
                       - "9c:55:04:22:6f:0c:30:c9:1e:da:ae:dd:aa:81:8a:86"
 
             - checkout
-            - setup_remote_docker
+            - setup_remote_docker:
+                docker_layer_caching: true
             # enable docker_layer_caching: true on better plan
 
             - restore_cache:
@@ -39,7 +40,7 @@ jobs:
                       MONGO_PORT=27017
                       MONGO_DB=ws_metalearnapp
                       JWT_SECRET=$(echo ${JWT_SECRET})
-                      FRONT_END_URL="https://www.metaschulapp.de"
+                      FRONT_END_URL=https://www.metaschulapp.de
                       DOMAIN=.metaschulapp.de
                       EOT
                       cat .env
