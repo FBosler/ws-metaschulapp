@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
-import { SCHOOLTYPES, CLASSES, SUBJECTS, USECASE } from "./options";
+import { SCHOOLTYPES, CLASSES, SUBJECTS, USECASE, FOCUSGROUP, APPTYPES } from "./options";
 
 const mapOptions = (selected, arr) => {
     return (
@@ -75,6 +75,20 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                             handleChange={handleChange}
                             label="Anwendungsgebiete"
                             options={USECASE}
+                        />
+                        <MultiSelect
+                            filterSettings={filterSettings}
+                            controlId="focusesOn"
+                            handleChange={handleChange}
+                            label="Ausgerichtet auf:"
+                            options={FOCUSGROUP}
+                        />
+                        <MultiSelect
+                            filterSettings={filterSettings}
+                            controlId="appTypes"
+                            handleChange={handleChange}
+                            label="App Typen:"
+                            options={APPTYPES}
                         />
                         <Col xs="auto">
                             <Form.Group controlId="name">

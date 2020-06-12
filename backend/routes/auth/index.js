@@ -71,7 +71,7 @@ router.get(
                 httpOnly: true,
                 domain: conf.DOMAIN
             })
-            .redirect(`${conf.FRONT_END_URL}/overview`);
+            .redirect(`${conf.FRONT_END_URL}/profile`);
     }
 );
 

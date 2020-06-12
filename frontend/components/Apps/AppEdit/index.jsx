@@ -12,6 +12,7 @@ import {
     SUBJECTS,
     USECASE,
     APPTYPES,
+    FOCUSGROUP,
     TEACHINGPHASES,
 } from "../Overview/Filter/options.js";
 
@@ -169,6 +170,13 @@ const AppEdit = ({ _id }) => {
                         targetField={"appTypes"}
                         currSelection={app.appTypes}
                         availableOptions={APPTYPES}
+                        handleMultiSelect={handleMultiSelect}
+                    />
+                    <DisplayMultiSelect
+                        label={"Ausgerichtet auf"}
+                        targetField={"focusesOn"}
+                        currSelection={app.focusesOn}
+                        availableOptions={FOCUSGROUP}
                         handleMultiSelect={handleMultiSelect}
                     />
                     <DisplayMultiSelect

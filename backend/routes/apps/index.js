@@ -13,38 +13,38 @@ import { rateApp, removeRating } from "../../database/app";
 const router = express.Router();
 
 router.get("/:_id", async (req, res) => {
-    if (ensureLoggedIn(req, res)) {
-        const _id = req.params._id;
+    const _id = req.params._id;
 
-        if (_id === "all") {
-            const [err, allApps] = await to(
-                App.find(
-                    {},
-                    {
-                        _id: 1,
-                        useCase: 1,
-                        name: 1,
-                        schoolTypes: 1,
-                        classes: 1,
-                        subjects: 1,
-                        ratings: 1,
-                        overallRating: 1,
-                        numberOfRatings: 1
-                    }
-                )
-            );
-            if (err) {
-                res.status(400).json({ data: {}, errors: err });
-            } else {
-                res.status(200).json({ data: allApps, errors: "" });
-            }
+    if (_id === "all") {
+        const [err, allApps] = await to(
+            App.find(
+                {},
+                {
+                    _id: 1,
+                    useCase: 1,
+                    name: 1,
+                    schoolTypes: 1,
+                    classes: 1,
+                    subjects: 1,
+                    ratings: 1,
+                    overallRating: 1,
+                    numberOfRatings: 1,
+                    appTypes: 1,
+                    focusesOn: 1
+                }
+            )
+        );
+        if (err) {
+            res.status(400).json({ data: {}, errors: err });
         } else {
-            const [err, app] = await to(App.findById(_id));
-            if (err) {
-                res.status(400).json({ data: {}, errors: err });
-            } else {
-                res.status(200).json({ data: app, errors: "" });
-            }
+            res.status(200).json({ data: allApps, errors: "" });
+        }
+    } else {
+        const [err, app] = await to(App.findById(_id));
+        if (err) {
+            res.status(400).json({ data: {}, errors: err });
+        } else {
+            res.status(200).json({ data: app, errors: "" });
         }
     }
 });
@@ -74,17 +74,17 @@ router.post("/rate_app", async (req, res) => {
     }
 });
 
-router.post("/remove_rating", async (req,res) => {
+router.post("/remove_rating", async (req, res) => {
     if (ensureLoggedIn(req, res)) {
         const userId = req.user.id;
         const { appId } = req.body;
-        const [err, update] = await to(removeRating({ appId, userId}));
+        const [err, update] = await to(removeRating({ appId, userId }));
         if (err) {
             res.status(400).json({ data: {}, errors: err });
         } else {
             res.status(200).json({ data: update, errors: "" });
         }
     }
-})
+});
 
 export default router;

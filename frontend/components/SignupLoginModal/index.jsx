@@ -38,7 +38,7 @@ const SignUpLoginForm = () => {
             .then(res => {
                 console.log(res)
                 contextUserData.updateUserState();
-                router.push("/overview");
+                router.push("/profile");
             })
             .catch(err => {
                 console.log(err);

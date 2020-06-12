@@ -185,6 +185,7 @@ const App = ({ _id }) => {
                     <Block label={"Webpage"} content={app.url} type="link" />
                     <Block label={"Erklärvideo"} content={app.explanationUrl} type="link" />
                     <List label={"Unterstützte Browser"} content={app.supportedBrowser} />
+                    <List label={"Ausgerichtet auf:"} content={app.focusesOn} />
                     <List label={"App Typen"} content={app.appTypes} />
                     <List label={"Schul Typen"} content={app.schoolTypes} />
                     <List label={"Klassen"} content={app.subjects} />
@@ -194,7 +195,7 @@ const App = ({ _id }) => {
                     {/* <BoolBlock label={"Erfordert Internet"} content={app.requiresInternet} />
                     <BoolBlock label={"Offlinenutzung möglich"} content={app.offlineModeAvailable} /> */}
                     <Row style={{ border: "solid 1px grey" }} />
-                    <h1>Eigene Bewertung schreiben:</h1>
+                    <h1>Eigene Bewertung schreiben (hierfür bitte einloggen)</h1>
                     <Comment app={app} setApp={setApp} />
                 </>
             ) : (

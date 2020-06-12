@@ -68,6 +68,8 @@ const Overview = ({ query }) => {
         schoolTypes: [],
         classes: [],
         useCase: [],
+        focusesOn: [],
+        appTypes: [],
     });
 
     useEffect(() => {
@@ -77,6 +79,8 @@ const Overview = ({ query }) => {
             schoolTypes: turnIntoArray(query.schoolTypes) ?? [],
             classes: turnIntoArray(query.classes) ?? [],
             useCase: turnIntoArray(query.useCase) ?? [],
+            focusesOn: turnIntoArray(query.focusesOn) ?? [],
+            appTypes: turnIntoArray(query.appTypes) ?? [],
         });
     }, [query]);
 
@@ -101,7 +105,7 @@ const Overview = ({ query }) => {
 
     useEffect(() => {
         if (apps) {
-            const { name, subjects, schoolTypes, classes, useCase } = filterSettings;
+            const { name, subjects, schoolTypes, classes, useCase, focusesOn, appTypes } = filterSettings;
             let filteredApps = [...apps];
             if (name) {
                 filteredApps = [...filteredApps.filter((app) => app.name.toLowerCase().includes(name.toLowerCase()))];
@@ -111,6 +115,8 @@ const Overview = ({ query }) => {
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: schoolTypes, field: "schoolTypes" });
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: classes, field: "classes" });
             filteredApps = filterMatching({ apps: filteredApps, applicableFilter: useCase, field: "useCase" });
+            filteredApps = filterMatching({ apps: filteredApps, applicableFilter: focusesOn, field: "focusesOn" });
+            filteredApps = filterMatching({ apps: filteredApps, applicableFilter: appTypes, field: "appTypes" });
 
             filteredApps = filteredApps.sort((a, b) => {
                 const a_val = a.numberOfRatings ?? -100;
@@ -134,7 +140,7 @@ const Overview = ({ query }) => {
                 </Row>
             ) : (
                 <Row>
-                    <Col>Bitte einloggen, um eine Übersicht der vorhanden Apps zu sehen</Col>
+                    <Col>Da ist wohl etwas schief gegangen</Col>
                 </Row>
             )}
         </>
