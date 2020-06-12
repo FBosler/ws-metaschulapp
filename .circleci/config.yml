@@ -32,7 +32,7 @@ jobs:
             - run:
                   name: Build .env file
                   command: |
-                      cat >.env <<EOT
+                      cat >.env \<<EOT
                       MONGO_HOSTNAME=db
                       MONGO_USERNAME=admin
                       MONGO_PASSWORD=$(echo ${JWT_SECRET})
