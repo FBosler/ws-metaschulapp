@@ -65,6 +65,7 @@ const SUBJECTS = [
     "Sachunterricht",
     "Sozialwissenschaften",
     "Spanisch",
+    "Sport",
     "Sprachen",
     "Technik",
     "Wirtschaft",
