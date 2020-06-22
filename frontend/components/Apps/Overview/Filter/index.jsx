@@ -30,6 +30,8 @@ const MultiSelect = ({ filterSettings, controlId, label, options, handleChange }
     );
 };
 
+const FILTERS = [ "subjects", "schoolTypes", "classes", "useCase", "focusesOn", "appTypes" ];
+
 // And now we can use these
 const Filter = ({ filterSettings, setFilterSettings }) => {
     const [showFilter, setShowFilter] = useState(true);
@@ -42,6 +44,19 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
             return newSettings;
         });
     };
+
+    const resetFilter = () => {
+        setFilterSettings(Object.fromEntries(FILTERS.map(_ => [_, []])));
+
+        /* setFilterSettings((settings) => {
+            const newSettings = { ...settings };
+            for (let i = 0;i < 6;i++){
+                newSettings[FILTERS[i]] = [];
+            }
+            return newSettings;
+        } );*/
+    }
+
 
     return (
         <>
@@ -111,6 +126,7 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                             </Form.Group>
                         </Col>
                         <Col>
+                            <Button onClick={resetFilter}>Filter zurücksetzen</Button>
                             <Button onClick={() => setShowFilter((showFilter) => !showFilter)}>
                                 Filter Einklappen
                             </Button>
