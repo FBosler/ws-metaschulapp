@@ -47,14 +47,6 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
 
     const resetFilter = () => {
         setFilterSettings(Object.fromEntries(FILTERS.map(_ => [_, []])));
-
-        /* setFilterSettings((settings) => {
-            const newSettings = { ...settings };
-            for (let i = 0;i < 6;i++){
-                newSettings[FILTERS[i]] = [];
-            }
-            return newSettings;
-        } );*/
     }
 
 
