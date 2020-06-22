@@ -118,7 +118,7 @@ const Filter = ({ filterSettings, setFilterSettings }) => {
                             </Form.Group>
                         </Col>
                         <Col>
-                            <Button onClick={resetFilter}>Filter zurücksetzen</Button>
+                            <Button onClick={() => resetFilter()}>Filter zurücksetzen</Button>
                             <Button onClick={() => setShowFilter((showFilter) => !showFilter)}>
                                 Filter Einklappen
                             </Button>
